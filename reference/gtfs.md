@@ -85,6 +85,15 @@ service_id | Required | Included |
 date | Required | Included | 
 exception_type | Required | Included | 
 
+## checkpoints.txt
+
+This table provides human-readable names to checkpoints from [stop_times.txt](#stop_timestxt). The tables are joined on the experimental `checkpoint_id` field.
+
+Field Name | GTFS spec | Status | Notes
+---------- | -------- | ------ | --------
+checkpoint_id | Experimental | Included | Values in this field must be unique.
+checkpoint_name | Experimental | Included | A general location can have multiple checkpoints; values in this field are not necessarily unique.
+
 ## facilities.txt
 
 Field Name | GTFS spec | Status | Notes
