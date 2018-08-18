@@ -4,7 +4,7 @@
 
 This document describes the MBTA's implementation of the General Transit Feed Specification (GTFS). It is intended to supplement, not replace, [documentation on GTFS itself](https://github.com/google/transit/tree/master/gtfs).
 
-The MBTA GTFS feed can be downloaded [here](https://cdn.mbta.com/MBTA_GTFS.zip).
+The MBTA GTFS feed is available from the following URL: [https://cdn.mbta.com/MBTA_GTFS.zip](https://cdn.mbta.com/MBTA_GTFS.zip).
 
 #### About the fields in this document
 
