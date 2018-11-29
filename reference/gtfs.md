@@ -30,6 +30,7 @@ Table Name | GTFS spec | Status | Notes
 [calendar.txt](#calendartxt) | Required | Included | Generated programatically. May not be easy for humans to read.
 [calendar_dates.txt](#calendar_datestxt) | Optional | Included | Generated programatically. May not be easy for humans to read.
 [checkpoints.txt](#checkpointstxt) | Experimental | Included | Similar in part to [stops.txt](#stopstxt), this table provides human-readable names to checkpoints from [stop_times.txt](#stop_timestxt).
+[directions.txt](#directionstxt) | Experimental | Included | Provides for passenger-facing names to be documented for direction_id on a route-by-route basis.
 [facilities.txt](#facilitiestxt) | Experimental | Included | Station amenities such as elevators, escalators, parking lots, and bike storage.
 [facilities_properties.txt](#facilities_propertiestxt) | Experimental | Included | Properties of station amenities in [facilities.txt](#facilitiestxt).
 [facilities_properties_definitions.txt](#facilities_properties_definitionstxt) | Experimental | Included | Definitions of the property_ids and values used in [facilities_properties.txt](#facilities_propertiestxt).
@@ -93,6 +94,17 @@ Field Name | GTFS spec | Status | Notes
 ---------- | -------- | ------ | --------
 checkpoint_id | Experimental | Included | Values in this field must be unique.
 checkpoint_name | Experimental | Included | A general location can have multiple checkpoints; values in this field are not necessarily unique.
+
+## directions.txt
+
+Provides for passenger-facing names to be documented for each direction_id value on a route-by-route basis. This specificiation adds onto the [GTFS+ directions.txt extension](https://www.transitwiki.org/TransitWiki/images/e/e7/GTFS+_Additional_Files_Format_Ver_1.7.pdf).
+
+Field Name | GTFS spec | Status | Notes
+---------- | -------- | ------ | --------
+route_id | Experimental | Included | Linked to [routes.txt](#routestxt) file.
+direction_id | Experimental | Included | Binary value linked to [trips.txt](#tripstxt) file. Combining `route_id` and `direction_id` forms the unique primary key for this file.
+direction | Experimental | Included | Human-readable text corresponding to a direction name in a given list. Current valid values are: <ul><li>North</li><li>South</li><li>East</li><li>West</li><li>Northeast</li><li>Northwest</li><li>Southeast</li><li>Southwest</li><li>Clockwise</li><li>Counterclockwise</li><li>Inbound</li><li>Outbound</li><li>Loop A</li><li>Loop B</li><li>Loop</li></ul>
+direction_destination | Experimental | Included | MBTA extension which provides the customer-facing direction name used on in-station wayfinding. It can, but need not, include all possible destinations; it could instead list a cardinal direction or city/town. For example, `direction_id` `0` on `route_id` `Red` may have a direction value of `South`, and a direction_destination of `Ashmont/Braintree`.
 
 ## facilities.txt
 
