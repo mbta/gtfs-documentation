@@ -38,6 +38,7 @@ Table Name | GTFS spec | Status | Notes
 [feed_info.txt](#feed_infotxt) | Optional | Included |
 [frequencies.txt](#frequenciestxt) | Optional | Included | Only used for Massport airport shuttles. If these move to a different feed, then [frequencies.txt](#frequenciestxt) will be removed.
 [levels.txt](#levelstxt) | Experimental | Included | Provides relative elevation information for stop_ids (including boarding platforms and station entrances) within a parent station.
+[lines.txt](#linestxt) | Experimental | Included | Groups similar routes (such as those which serve the same trunk corridor or bus terminal) for the purpose of customer display.
 [multi_route_trips.txt](#multi_route_tripstxt) | Experimental | Included | For trips that travel on more than one route, this file identifies additional routes with which the trip should be associated.
 [pathways.txt](#pathwaystxt) | Experimental | Included | Information and travel times about paths within and out of parent stations, including paths between platforms and to/from station entrances.
 [routes.txt](#routestxt) | Required | Included |
@@ -161,6 +162,21 @@ level_id | Experimental | Included | The `level_id` field contains an ID that un
 level_index | Experimental | Included | Relative position of a level. In general, a value of `0` indicates the ground (or street) level, position values indicate levels above ground, and negative values indicate levels below ground. For some stations on slopes, it may be necessary to have multiple levels to represent adjacent streets, if the streets are at different elevations.
 level_name | Experimental | Included | 
 level_elevation | Experimental (empty) | Included | 
+
+## lines.txt
+
+In this file, a line is a combination of existing routes in [routes.txt](#routestxt). This concept can be used to group similar routes when displaying them to customers, such as for routes which serve the same trunk corridor or bus terminal. Lines have similar attributes as routes, such as short and long names, descriptions, URLs, colors, and sort ordering.
+
+Field Name | GTFS spec | Status | Notes
+---------- | -------- | ------ | --------
+line_id | Experimental | Included | Feed-unique identifier for lines, or groups of routes. This ID will be referenced in [routes.txt](#routestxt) for routes which are contained in this line.
+line_short_name | Experimental | Included | Short, public-facing name for the group of routes represented in this line. Usage between this field and `line_long_name` is the same as the relationship between `route_short_name` and `route_long_name`.
+line_long_name | Experimental | Included | Lengthier, public-facing name for the group of routes represented in this line. Usage between this field and `line_short_name` is the same as the relationship between `route_short_name` and `route_long_name`.
+line_desc | Experimental (empty) | Included | Contains a human-readable description of the line.
+line_url | Experimental | Included (empty) | Contains the URL of a web page about the particular line. This should be different from the agency_url or any route_url values. The value must be a fully qualified URL that includes `http://` or `https://`, and any special characters in the URL must be correctly escaped.
+line_color | Experimental | Included | In systems that have colors assigned to lines, the route_color field defines a color that corresponds to a line. The color must be provided as a six-character hexadecimal number, for example, `00FFFF`. If no color is specified, the default route color is white (`FFFFFF`).
+line_text_color | Experimental | Included | This field can be used to specify a legible color to use for text drawn against a background of line_color. The color must be provided as a six-character hexadecimal number, for example, `FFD700`. If no color is specified, the default text color is black (`000000`).
+line_sort_order | Experimental | Included | The `line_sort_order` field can be used to order the lines in a way which is ideal for presentation to customers. It must be a non-negative integer. Lines with smaller `line_sort_order` values should be displayed before lines with larger `line_sort_order` values.
 
 ## multi_route_trips.txt
 
