@@ -39,6 +39,7 @@ Table Name | GTFS spec | Status | Notes
 [feed_info.txt](#feed_infotxt) | Optional | Included |
 [frequencies.txt](#frequenciestxt) | Optional | Included | Only used for Massport airport shuttles. If these move to a different feed, then [frequencies.txt](#frequenciestxt) will be removed.
 [levels.txt](#levelstxt) | Experimental | Included | Provides relative elevation information for stop_ids (including boarding platforms and station entrances) within a parent station.
+[lines.txt](#linestxt) | Experimental | Included | Groups similar routes (such as those which serve the same trunk corridor or bus terminal) for the purpose of customer display.
 [multi_route_trips.txt](#multi_route_tripstxt) | Experimental | Included | For trips that travel on more than one route, this file identifies additional routes with which the trip should be associated.
 [pathways.txt](#pathwaystxt) | Experimental | Included | Information and travel times about paths within and out of parent stations, including paths between platforms and to/from station entrances.
 [routes.txt](#routestxt) | Required | Included |
@@ -174,6 +175,21 @@ level_index | Experimental | Included | Relative position of a level. In general
 level_name | Experimental | Included | 
 level_elevation | Experimental (empty) | Included | 
 
+## lines.txt
+
+In this file, a line is a combination of existing routes in [routes.txt](#routestxt). This concept can be used to group similar routes when displaying them to customers, such as for routes which serve the same trunk corridor or bus terminal. Lines have similar attributes as routes, such as short and long names, descriptions, URLs, colors, and sort ordering.
+
+Field Name | GTFS spec | Status | Notes
+---------- | -------- | ------ | --------
+line_id | Experimental | Included | Feed-unique identifier for lines, or groups of routes. This ID will be referenced in [routes.txt](#routestxt) for routes which are contained in this line.
+line_short_name | Experimental | Included | Short, public-facing name for the group of routes represented in this line. Usage between this field and `line_long_name` is the same as the relationship between `route_short_name` and `route_long_name`.
+line_long_name | Experimental | Included | Lengthier, public-facing name for the group of routes represented in this line. Usage between this field and `line_short_name` is the same as the relationship between `route_short_name` and `route_long_name`.
+line_desc | Experimental (empty) | Included | Contains a human-readable description of the line.
+line_url | Experimental | Included (empty) | Contains the URL of a web page about the particular line. This should be different from the agency_url or any route_url values. The value must be a fully qualified URL that includes `http://` or `https://`, and any special characters in the URL must be correctly escaped.
+line_color | Experimental | Included | In systems that have colors assigned to lines, the route_color field defines a color that corresponds to a line. The color must be provided as a six-character hexadecimal number, for example, `00FFFF`. If no color is specified, the default route color is white (`FFFFFF`).
+line_text_color | Experimental | Included | This field can be used to specify a legible color to use for text drawn against a background of line_color. The color must be provided as a six-character hexadecimal number, for example, `FFD700`. If no color is specified, the default text color is black (`000000`).
+line_sort_order | Experimental | Included | The `line_sort_order` field can be used to order the lines in a way which is ideal for presentation to customers. It must be a non-negative integer. Lines with smaller `line_sort_order` values should be displayed before lines with larger `line_sort_order` values.
+
 ## multi_route_trips.txt
 
 Some transit trips serve more than one route. For example, Commuter Rail trips that travel partly on the Lowell Line and partly on the Haverhill Line, or bus trips labeled "Route 62/76" that should be shown on the respective schedules for both Route 62 and Route 76. This applies when a trip serves one route and then the other, but also when the trip serves a unique combination of stops from each route.
@@ -218,12 +234,15 @@ route_id | Required | Included (persistent) |
 agency_id | Optional | Included (persistent) | 
 route_short_name | Required | Included (some records) | Populated for service with branches (such as Green Line or Silver Line), all MBTA bus services, and Massport.<br><br>If `route_short_name` is populated for a route, regardless of the presence of `route_long_name`, then "Route `route_short_name`" is an appropriate way to describe the route.
 route_long_name | Required | Included (some records) | Populated for all modes. For rapid transit services with branches (Green Line), both `route_long_name` and `route_short_name` are populated: `route_short_name` containts the branch designation only, and `route_long_name` identifies both the route and the branch.<br><br>For rail-based and ferry services, `route_long_name` identifies a lengthier, commonly-used route identifier, such as "Red Line" or "Providence/Stoughton Line".<br>For bus services only, `route_long_name` provides the typical end points for the route, and should **not** be used as a standalone route identifier.
-route_desc | Optional | Included (some records) | Categorizes type of service. For example, identifies whether bus service is express bus or local bus, identifies if service is rapid transit. Note that "Rapid Transit" `route_desc` values are associated with multiple `route_type` values.<br><br>**Possible Values:**<ul><li>`Airport Shuttle`</li><li>`Commuter Rail`</li><li>`Rapid Transit`</li><li>`Local Bus`</li><li>`Key Bus Route (Frequent Service)`</li><li>`Limited Service`</li><li>`Express Bus`</li><li>`Ferry`</li><li>`Rail Replacement Bus`</li></ul>
+route_desc | Optional | Included | Categorizes a route's level of service. For example, identifies whether bus service runs frequently all day, is aimed at weekday commuters, or supplements service on other routes.<br><br>**Possible Values:**<ul><li>`Airport Shuttle`</li><li>`Commuter Rail`</li><li>`Rapid Transit`</li><li>`Local Bus`</li><li>`Key Bus`</li><li>`Supplemental Bus`</li><li>`Community Bus`</li><li>`Commuter Bus`</li><li>`Ferry`</li><li>`Rail Replacement Bus`</li></ul>
+route_fare_class | Experimental | Included | Specifies the fare type of the route, which can differ from the service category. This proposal uses this field instead of using [fare_rules.txt](#fare_rulestxt) and [fare_attributes.txt](#fare_attributestxt) as those files currently do not support the entirety of the MBTA’s fare and transfer policies For public-facing applications, we recommend that use and display of route_fare_class be equally or more prominent than `route_desc`, as passengers often identify routes by their fares..<br><br>**Possible values for the MBTA implementation:**<ul><li>`Local Bus`</li><li>`Inner Express`</li><li>`Outer Express`</li><li>`Rapid Transit`</li><li>`Commuter Rail`</li><li>`Ferry`</li><li>`Free`</li><li>`Special`</li></ul>
 route_type | Required | Included | Indicates the type of vehicle that operates the route. It is not recommended to use this field's values to categorize MBTA service. 
 route_url | Optional | Included (some records) | 
 route_color | Optional | Included (some records) | 
 route_text_color | Optional | Included (some records) | 
 route_sort_order | Experimental | Included | Integer value that can be used for ordering routes in a way that is ideal for presentation to customers.
+line_id | Experimental | Included (some records) | References `line_id` values from [lines.txt](#linestxt). Indicates in which grouping of routes this route belongs, if any. For example, `route_id` `62` may have a `line_id` value of `line-6276`. Note that groupings are subject to change without notice.
+listed_route | Experimental | Included (some records) | Indicates whether route should be included in a public-facing list of all routes. This is useful for determining which routes which should not be shown by themselves, but rather part of another route. Most uses of this field should incorporate data from [multi_route_trips.txt](#multi_route_tripstxt). The following values are valid:<ul><li>`0` (or empty): Route should be included in a list of routes.</li><li>`1`: Route should not be included in a public-facing list of routes.</li></ul>For example, in the future, service for route “450W” trips may appear under a `route_id` of `450W`, but with a `listed_route` value of `1`, and all of the route’s trips included in [multi_route_trips.txt](#multi_route_tripstxt) to be displayed together with `route_id` `450`.
 
 ## shapes.txt
 
