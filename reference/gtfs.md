@@ -149,7 +149,7 @@ feed_lang | Required | Included |
 feed_start_date | Optional | Included | When comparing two GTFS feeds, the newer one will always have a newer `feed_start_date`.
 feed_end_date | Optional | Included |
 feed_version | Optional | Included | 
-feed_contact_email | Experimental | Included | An email address for communication regarding the GTFS dataset and data publishing practices. It is a technical contact for GTFS-consuming applications. Provide customer service contact information through [agency.txt](agencytxt).
+feed_contact_email | Optional | Included | An email address for communication regarding the GTFS dataset and data publishing practices. It is a technical contact for GTFS-consuming applications. Provide customer service contact information through [agency.txt](agencytxt).
 
 ## frequencies.txt
 
