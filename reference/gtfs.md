@@ -44,6 +44,7 @@ Table Name | GTFS spec | Status | Notes
 [multi_route_trips.txt](#multi_route_tripstxt) | Experimental | Included | For trips that travel on more than one route, this file identifies additional routes with which the trip should be associated.
 [pathways.txt](#pathwaystxt) | Experimental | Included | Information and travel times about paths within and out of parent stations, including paths between platforms and to/from station entrances.
 [routes.txt](#routestxt) | Required | Included |
+[route_patterns.txt](#routepatternstxt) | Experimental | Included | Information about the different variations of service that may be run within a single `route_id`, including when and how often they are operated.
 [shapes.txt](#shapestxt) | Optional | Included |
 [stops.txt](#stopstxt) | Required | Included |
 [stop_times.txt](#stop_timestxt) | Required | Included |
@@ -257,6 +258,25 @@ route_sort_order | Experimental | Included | Integer value that can be used for 
 line_id | Experimental | Included (some records) | References `line_id` values from [lines.txt](#linestxt). Indicates in which grouping of routes this route belongs, if any. For example, `route_id` `62` may have a `line_id` value of `line-6276`. Note that groupings are subject to change without notice.
 listed_route | Experimental | Included (some records) | Indicates whether route should be included in a public-facing list of all routes. This is useful for determining which routes which should not be shown by themselves, but rather part of another route. Most uses of this field should incorporate data from [multi_route_trips.txt](#multi_route_tripstxt). The following values are valid:<ul><li>`0` (or empty): Route should be included in a list of routes.</li><li>`1`: Route should not be included in a public-facing list of routes.</li></ul>For example, in the future, service for route "450W" trips may appear under a `route_id` of `450W`, but with a `listed_route` value of `1`, and all of the route's trips included in [multi_route_trips.txt](#multi_route_tripstxt) to be displayed together with `route_id` `450`.
 
+## route_patterns.txt
+
+Experimental file used to describe the subsets of a route, representing different possible patterns of where trips may serve. For example, a bus route may have multiple branches, and each branch may be modeled as a separate route pattern per direction. Hieratically, the route pattern level may be considered to be larger than the trip level and smaller than the route level.
+
+For most MBTA modes, a route pattern will typically represent a unique set of stops that may be served on a route-trip combination. Seasonal schedule changes may result in trips within a route pattern having different routings. In simple changes, such a single bus stop removed or added between one schedule rating and the next (for example, between the Summer and Fall schedules), trips will be maintained on the same `route_pattern_id`. If the changes are significant, a new `route_pattern_id` will be introduced.
+
+For Commuter Rail, route patterns represent complete branches at this time, with most including trips on multiple sets of stops. For example, `CR-Providence` will contain two route patterns per direction, one for the Wickford Junction branch and the other for the Stoughton branch.
+
+Field Name | GTFS spec | Status |  Notes
+---------- | -------- | ------ | -------
+route_pattern_id | Experimental | Included | Database-unique identifier for the route pattern. For the MBTA, this will generally be a concatenation including the `route_id` and `direction_id`. Values from this field are referenced in [trips.txt](#tripstxt).
+route_id | Experimental | Included | Route IDs for which route patterns are valid are referenced in [routes.txt](#routestxt).
+direction_id | Experimental | Included | Direction IDs for which route patterns are valid are referenced in [trips.txt](#tripstxt).
+route_pattern_name | Experimental | Included | User-facing description of where trips on the route pattern serve. These names are published in the form **Destination**, **Destination via Street or Landmark**, **Origin - Destination**, or **Origin - Destination via Street or Landmark**. Note that names for bus and subway route patterns currently do not include the origin location, but will in the future.
+route_pattern_time_desc | Experimental | Included (some records) | User-facing description of when the route pattern operate. Not all route patterns will include a time description. Several examples of possible values include `Early mornings only`, `Weekday evenings only`, `Saturdays only`, and `School days only`.
+route_pattern_typicality | Experimental | Included | Explains how common the route pattern is. For the MBTA, this is within the context of the entire route. Current valid values are:<ul><li>`0` (or empty): Not defined.</li><li>`1`: Typical. Pattern is common for the route. Most routes will have only one such pattern per direction. A few routes may have more than 1, such as the Red Line (with one branch to Ashmont and another to Braintree); routes with more than 2 are rare.</li><li>`2`: Pattern is a deviation from the regular route.</li><li>`3`: Pattern represents a highly atypical pattern for the route, such as a special routing which only runs a handful of times per day.</li><li>`4`: Diversions from normal service, such as planned detours, bus shuttles, or snow routes.</li></ul>
+route_pattern_sort_order | Experimental | Included | The `route_pattern_sort_order` field can be used to order the route patterns in a way which is ideal for presentation to customers. Values are non-negative integers. Route patterns with smaller `route_pattern_sort_order` values should be displayed before those with larger `route_pattern_sort_order` values.
+representative_trip_id | Experimental | Included | A trip ID that can be considered a canonical trip for the route pattern. Referring to this value in [trips.txt](#tripstxt) and [stoptimes.txt](#stoptimestxt), a pattern's canonical set of stops and shape ID and be deduced. Note that in this implementation, if a GTFS feed includes trips from multiple schedule ratings, which may include changes in the pattern's routing, the `representative_trip_id` will come from the schedule rating in effect at the time of the feed's release.
+
 ## shapes.txt
 
 Field Name | GTFS spec | Status |  Notes
@@ -329,5 +349,7 @@ direction_id | Optional | Included (persistent) | Refer to `trip_headsign` value
 block_id | Optional | Included (some records) | `block_id` here does **not** imply that a customer can remain on a vehicle through to the next trip, although there are some routes where this is permitted. These routes will be identified in a future GTFS change.<br><br>MBTA routes which allow ride-through to next trip: `26`, `43`, `741`, `742`, `749`, `67`, `76`
 shape_id | Optional | Included | Generally included, but not guaranteed.
 wheelchair_accessible | Optional | Included | For MBTA vehicles that are wheelchair accessible, the value is always `1`.
+bikes_allowed | Optional | Included | `1` if bikes are allowed on the trip, `2` if they are not. Empty or `0` values make no claim to whether bikes are allowed.
+route_pattern_id | Experimental | Included | Indicates the pattern of a route that a particuar trip will operate. Values linked to those in [route_patterns.txt](#routepatternstxt).
 bikes_allowed | Optional | Included | `1` if bikes are allowed on the trip, `2` if they are not. Empty or `0` values make no claim to whether bikes are allowed.
 trip_route_type | Experimental | Included (some records) | Indicates the type of vehicle that operates the particular trip if the type of vehicle is not the same as specified in the route's `route_type` (i.e. if part of Blue Line subway service is replaced with a shuttle bus for one weekend). Definitions match those of `route_type`. For most trips, this is empty.
