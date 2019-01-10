@@ -268,7 +268,7 @@ stop_lat | Required | Included | Records with a `parent_station` value currently
 stop_lon | Required | Included | Records with a `parent_station` value currently have the same `stop_lon` value as the `parent_station`. However, the `parent_station` and child `stop_lon` values will differ in future versions of GTFS.
 zone_id | Optional | Included (empty) | 
 stop_address | Experimental | Included (some records) | Optional field which allows a stop to have included a human-readable address.
-stop_url | Optional | Included (empty) | 
+stop_url | Optional | Included (some records) | Populated for stops which are not entrances, as defined by having a `location_type` of `2`.
 level_id | Experimental | Included (some records) | Reference to vertical station level from [levels.txt](#levelstxt).
 location_type | Optional | Included | A value of `2` designates a station entrance/exit, whereas `0` indicates a distinct boarding location, and `1` indicates a parent station complex.
 parent_station | Optional | Included (some records) | For subway stations, the `parent_station`'s `stop_id` represents the whole facility and the child stop represents a specific platform. Use for identifying a station and indicating where specifically to enter a vehicle, respectively.<br><br>All subway stops have a parent station. If a commuter rail stop also serves the subway, then it will have a parent station. Future updates will add parent stations for all commuter rail stops.
@@ -316,5 +316,5 @@ direction_id | Optional | Included (persistent) | Refer to `trip_headsign` value
 block_id | Optional | Included (some records) | `block_id` here does **not** imply that a customer can remain on a vehicle through to the next trip, although there are some routes where this is permitted. These routes will be identified in a future GTFS change.<br><br>MBTA routes which allow ride-through to next trip: `26`, `43`, `741`, `742`, `749`, `67`, `76`
 shape_id | Optional | Included | Generally included, but not guaranteed.
 wheelchair_accessible | Optional | Included | For MBTA vehicles that are wheelchair accessible, the value is always `1`.
-|  bikes_allowed | Optional | Included (some records) | `1` if bikes are allowed on the trip, `2` if they are not. Empty values make no claim to whether bikes are allowed. Currently only non-empty for Commuter Rail trips.
+bikes_allowed | Optional | Included | `1` if bikes are allowed on the trip, `2` if they are not. Empty or `0` values make no claim to whether bikes are allowed.
 trip_route_type | Experimental | Included (some records) | Indicates the type of vehicle that operates the particular trip if the type of vehicle is not the same as specified in the route's `route_type` (i.e. if part of Blue Line subway service is replaced with a shuttle bus for one weekend). Definitions match those of `route_type`. For most trips, this is empty.
