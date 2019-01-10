@@ -28,6 +28,7 @@ Table Name | GTFS spec | Status | Notes
 ---------- | ---------| ------- | ---------
 [agency.txt](#agencytxt) | Required | Included |
 [calendar.txt](#calendartxt) | Required | Included | Generated programatically. May not be easy for humans to read.
+[calendar_attributes.txt](#calendar_attributestxt) | Experimental | Included | Adds human-readable names and further context to calendar `service_id`s.
 [calendar_dates.txt](#calendar_datestxt) | Optional | Included | Generated programatically. May not be easy for humans to read.
 [checkpoints.txt](#checkpointstxt) | Experimental | Included | Similar in part to [stops.txt](#stopstxt), this table provides human-readable names to checkpoints from [stop_times.txt](#stop_timestxt).
 [directions.txt](#directionstxt) | Experimental | Included | Provides for passenger-facing names to be documented for direction_id on a route-by-route basis.
@@ -78,6 +79,18 @@ saturday | Required | Included |
 sunday | Required | Included | 
 start_date | Required | Included | 
 end_date | Required | Included |
+
+## calendar_attributes.txt
+
+Adds human-readable names to calendar `service_id`s and further information about when they operate and how closely the service aligns to service on a typical day. This specificiation adds onto the [GTFS+ calendar_attributes.txt extension](https://www.transitwiki.org/TransitWiki/images/e/e7/GTFS+_Additional_Files_Format_Ver_1.7.pdf).
+
+Field Name | GTFS spec | Status | Notes
+---------- | -------- | ------ | --------
+service_id | Experimental | Included | Linked to values in [calendar.txt](#calendartxt) and [calendar_dates.txt](#calendar_datestxt).
+service_description | Experimental | Included | Human-readable description of the service, as it should appear on public-facing websites and applications. Some of the possible values include, but are not limited to, "Weekday schedule", "Weekday schedule (no school)", "Saturday schedule", "Saturday schedule (modified)", "Holiday (Sunday schedule)", and "Storm schedule (reduced service)".
+service_schedule_name | Experimental | Included | Description of when the `service_id` is in effect. Typically will look like "Weekday", "Weekday (no school)", "Holiday", "Saturday", "Sunday", and "Storm (reduced schedule)".
+service_schedule_type | Experimental | Included | Description of the schedule type the `service_id` can be applied. For example, on a holiday, the `service_schedule_type` value may be "Saturday" or "Sunday". Current valid values are:<ul><li>Weekday</li><li>Saturday</li><li>Sunday</li><li>Other</li></ul>
+service_schedule_typicality | Experimental | Included | Describes how well this schedule represents typical service for the listed `service_schedule_type`. Current valid values are:<ul><li>`0` (or empty): Not defined.</li><li>`1`: Typical service with perhaps minor modifications</li><li>`2`: Extra service supplements typical schedules</li><li>`3`: Reduced holiday service is provided by typical Saturday or Sunday schedule</li><li>`4`: Major changes in service due to a planned disruption, such as construction</li><li>`5`: Major reductions in service for weather events or other atypical situations</li></ul>
 
 ## calendar_dates.txt
 
