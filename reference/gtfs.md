@@ -285,7 +285,7 @@ shape_id | Required | Included |
 shape_pt_lat | Required | Included | 
 shape_pt_lon | Required | Included | 
 shape_pt_sequence | Required | Included | 
-shape_dist_traveled | Optional | Included (empty) | 
+shape_dist_traveled | Optional | Included | Distances reported in meters.
 
 ## stops.txt
 
