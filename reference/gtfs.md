@@ -322,6 +322,7 @@ pickup_type | Optional | Included | A `pickup_type` of 3 represents a commuter r
 drop_off_type | Optional | Included | A `drop_off_type` of 3 represents a commuter rail "flag" stop marked with "F" on the schedule. Customer must notify the conductor to exit. 
 shape_dist_traveled | Optional | N/A | 
 timepoint| Optional | Included | On Commuter Rail, stops that are not timepoints and are not the last stop are labeled "L" on printed schedules to indicate that the train may leave early. MBTA bus and subway operations do not have many scheduled hold points so very few of their stop times have a `timepoint` value of 1.
+checkpoint_id | Experimental | Included (some records) | Identifier for locations at which on-time performance is measured. This includes all MBTA subway stops and major bus stops. Primarily for internal use. Refer also to [checkpoints.txt](#checkpointstxt). A `checkpoint_id` corresponds to a general geographic location (such as a public square or rail station) and can be shared by several routes at different `stop_id`s in close proximity.
 
 ## transfers.txt
 
