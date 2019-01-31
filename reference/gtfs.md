@@ -321,7 +321,8 @@ stop_headsign | Optional | Included (empty) | While not currently used, this fie
 pickup_type | Optional | Included | A `pickup_type` of 3 represents a commuter rail "flag" stop marked with "F" on the schedule. Customer must visible to the approaching train to board.  
 drop_off_type | Optional | Included | A `drop_off_type` of 3 represents a commuter rail "flag" stop marked with "F" on the schedule. Customer must notify the conductor to exit. 
 shape_dist_traveled | Optional | N/A | 
-timepoint| Optional | Included | On Commuter Rail, stops that are not timepoints and are not the last stop are labeled "L" on printed schedules to indicate that the train may leave early. MBTA bus and subway operations do not have many scheduled hold points so very few of their stop times have a `timepoint` value of 1.  
+timepoint| Optional | Included | On Commuter Rail, stops that are not timepoints and are not the last stop are labeled "L" on printed schedules to indicate that the train may leave early. MBTA bus and subway operations do not have many scheduled hold points so very few of their stop times have a `timepoint` value of 1.
+checkpoint_id | Experimental | Included (some records) | Identifier for locations at which on-time performance is measured. This includes all MBTA subway stops and major bus stops. Primarily for internal use. Refer also to [checkpoints.txt](#checkpointstxt). A `checkpoint_id` corresponds to a general geographic location (such as a public square or rail station) and can be shared by several routes at different `stop_id`s in close proximity.
 
 ## transfers.txt
 
@@ -349,7 +350,6 @@ direction_id | Optional | Included (persistent) | Refer to `trip_headsign` value
 block_id | Optional | Included (some records) | `block_id` here does **not** imply that a customer can remain on a vehicle through to the next trip, although there are some routes where this is permitted. These routes will be identified in a future GTFS change.<br><br>MBTA routes which allow ride-through to next trip: `26`, `43`, `741`, `742`, `749`, `67`, `76`
 shape_id | Optional | Included | Generally included, but not guaranteed.
 wheelchair_accessible | Optional | Included | For MBTA vehicles that are wheelchair accessible, the value is always `1`.
-bikes_allowed | Optional | Included | `1` if bikes are allowed on the trip, `2` if they are not. Empty or `0` values make no claim to whether bikes are allowed.
+trip_route_type | Experimental | Included (some records) | Indicates the type of vehicle that operates the particular trip if the type of vehicle is not the same as specified in the route's `route_type` (i.e. if part of Blue Line subway service is replaced with a shuttle bus for one weekend). Definitions match those of `route_type`. For most trips, this is empty.
 route_pattern_id | Experimental | Included | Indicates the pattern of a route that a particuar trip will operate. Values linked to those in [route_patterns.txt](#routepatternstxt).
 bikes_allowed | Optional | Included | `1` if bikes are allowed on the trip, `2` if they are not. Empty or `0` values make no claim to whether bikes are allowed.
-trip_route_type | Experimental | Included (some records) | Indicates the type of vehicle that operates the particular trip if the type of vehicle is not the same as specified in the route's `route_type` (i.e. if part of Blue Line subway service is replaced with a shuttle bus for one weekend). Definitions match those of `route_type`. For most trips, this is empty.
