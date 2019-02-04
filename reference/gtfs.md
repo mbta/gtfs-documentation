@@ -335,7 +335,7 @@ min_transfer_time | Optional | Included (some records) | As specified in the GTF
 min_walk_time | Experimental | Included (some records) | Minimum time required to travel by foot from `from_stop_id` to `to_stop_id`.
 min_wheelchair_time | Experimental | Included (some records) | Minimum time required to travel by wheelchair `from_stop_id` to `to_stop_id`. If the transfer is not wheelchair accessible, this field will be blank.
 suggested_buffer_time | Experimental | Included (some records) | Recommended buffer time to allow to make a successful transfer between two services. This is also partly based on the significance of missing the transfer (due to service frequency).
-accessible_transfer | Experimental | Included (some records) | `1` if a transfer is wheelchair accessible, `2` if it is not.
+wheelchair_transfer | Experimental | Included (some records) | `1` if a transfer is wheelchair accessible, `2` if it is not.
 
 ## trips.txt
 
