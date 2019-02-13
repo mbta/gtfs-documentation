@@ -44,7 +44,7 @@ Table Name | GTFS spec | Status | Notes
 [multi_route_trips.txt](#multi_route_tripstxt) | Experimental | Included | For trips that travel on more than one route, this file identifies additional routes with which the trip should be associated.
 [pathways.txt](#pathwaystxt) | Experimental | Included | Information and travel times about paths within and out of parent stations, including paths between platforms and to/from station entrances.
 [routes.txt](#routestxt) | Required | Included |
-[route_patterns.txt](#routepatternstxt) | Experimental | Included | Information about the different variations of service that may be run within a single `route_id`, including when and how often they are operated.
+[route_patterns.txt](#route_patternstxt) | Experimental | Included | Information about the different variations of service that may be run within a single `route_id`, including when and how often they are operated.
 [shapes.txt](#shapestxt) | Optional | Included |
 [stops.txt](#stopstxt) | Required | Included |
 [stop_times.txt](#stop_timestxt) | Required | Included |
