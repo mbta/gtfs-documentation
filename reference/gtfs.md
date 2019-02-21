@@ -53,7 +53,7 @@ Table Name | GTFS spec | Status | Notes
 
 ## agency.txt
 
-Agencies in the MBTA GTFS feed include the MBTA itself and [Cape Cod RTA](http://capecodrta.org/). Cape Cod RTA may move to a separate GTFS feed in the future.
+Agencies in the MBTA GTFS feed include the MBTA itself and [Cape Cod RTA](http://capecodrta.org/) (for the CapeFLYER). The CapeFLYER may move to a separate GTFS feed in the future, in which case CCRTA would be removed from this file.
 
 Field Name | GTFS spec| Status | Notes
 ---------- | -------- | ------ | -------
