@@ -38,7 +38,7 @@ Table Name | GTFS spec | Status | Notes
 [fare_attributes.txt](#fare_attributestxt) | Optional | N/A |
 [fare_rules.txt](#fare_rulestxt) | Optional | N/A |
 [feed_info.txt](#feed_infotxt) | Optional | Included |
-[frequencies.txt](#frequenciestxt) | Optional | Included | Only used for Massport airport shuttles. If these move to a different feed, then [frequencies.txt](#frequenciestxt) will be removed.
+[frequencies.txt](#frequenciestxt) | Optional | N/A | 
 [levels.txt](#levelstxt) | Experimental | Included | Provides relative elevation information for stop_ids (including boarding platforms and station entrances) within a parent station.
 [lines.txt](#linestxt) | Experimental | Included | Groups similar routes (such as those which serve the same trunk corridor or bus terminal) for the purpose of customer display.
 [multi_route_trips.txt](#multi_route_tripstxt) | Experimental | Included | For trips that travel on more than one route, this file identifies additional routes with which the trip should be associated.
@@ -53,7 +53,7 @@ Table Name | GTFS spec | Status | Notes
 
 ## agency.txt
 
-Agencies in the MBTA GTFS feed include the MBTA itself, [CapeFlyer](http://capeflyer.com/), and [Massport](http://www.massport.com/logan-airport/to-from-logan/transportation-options/on-airport-shuttle/) (for airport shuttles). CapeFlyer and Massport may move to separate GTFS feeds in the future.
+Agencies in the MBTA GTFS feed include the MBTA itself and [Cape Cod RTA](http://capecodrta.org/) (for the CapeFLYER). The CapeFLYER may move to a separate GTFS feed in the future, in which case CCRTA would be removed from this file.
 
 Field Name | GTFS spec| Status | Notes
 ---------- | -------- | ------ | -------
@@ -166,18 +166,6 @@ feed_end_date | Optional | Included |
 feed_version | Optional | Included | 
 feed_contact_email | Optional | Included | An email address for communication regarding the GTFS dataset and data publishing practices. It is a technical contact for GTFS-consuming applications. Provide customer service contact information through [agency.txt](agencytxt).
 
-## frequencies.txt
-
-Used only for [Massport airport shuttles](http://www.massport.com/logan-airport/to-from-logan/transportation-options/on-airport-shuttle/). If these move to a different feed then [frequencies.txt](#frequenciestxt) will be removed.
-
-Field Name | GTFS spec | Status | Notes
----------- | -------- | ------ | --------
-trip_id | Required | Included (persistent) | 
-start_time | Required | Included | 
-end_time | Required | Included | 
-headway_secs | Required | Included | 
-exact_times | Optional | N/A | 
-
 ## levels.txt
 
 Experimental file used to describe the vertical levels within a station. level_ids can be applied to stops in **stops.txt**. [Learn more about the levels extension to GTFS.](https://github.com/google/transit/pull/86)
@@ -246,9 +234,9 @@ Field Name | GTFS spec | Status |  Notes
 ---------- | ------- | ------- | --------
 route_id | Required | Included (persistent) |
 agency_id | Optional | Included (persistent) | 
-route_short_name | Required | Included (some records) | Populated for service with branches (such as Green Line or Silver Line), all MBTA bus services, and Massport.<br><br>If `route_short_name` is populated for a route, regardless of the presence of `route_long_name`, then "Route `route_short_name`" is an appropriate way to describe the route.
+route_short_name | Required | Included (some records) | Populated for service with branches on separate route IDs (such as Green Line or Silver Line) and all MBTA bus services.<br><br>If `route_short_name` is populated for a route, regardless of the presence of `route_long_name`, then "Route `route_short_name`" is an appropriate way to describe the route.
 route_long_name | Required | Included (some records) | Populated for all modes. For rapid transit services with branches (Green Line), both `route_long_name` and `route_short_name` are populated: `route_short_name` containts the branch designation only, and `route_long_name` identifies both the route and the branch.<br><br>For rail-based and ferry services, `route_long_name` identifies a lengthier, commonly-used route identifier, such as "Red Line" or "Providence/Stoughton Line".<br>For bus services only, `route_long_name` provides the typical end points for the route, and should **not** be used as a standalone route identifier.
-route_desc | Optional | Included | Categorizes a route's level of service. For example, identifies whether bus service runs frequently all day, is aimed at weekday commuters, or supplements service on other routes.<br><br>**Possible Values:**<ul><li>`Airport Shuttle`</li><li>`Commuter Rail`</li><li>`Rapid Transit`</li><li>`Local Bus`</li><li>`Key Bus`</li><li>`Supplemental Bus`</li><li>`Community Bus`</li><li>`Commuter Bus`</li><li>`Ferry`</li><li>`Rail Replacement Bus`</li></ul>
+route_desc | Optional | Included | Categorizes a route's level of service. For example, identifies whether bus service runs frequently all day, is aimed at weekday commuters, or supplements service on other routes.<br><br>**Possible Values:**<ul><li>`Commuter Rail`</li><li>`Rapid Transit`</li><li>`Local Bus`</li><li>`Key Bus`</li><li>`Supplemental Bus`</li><li>`Community Bus`</li><li>`Commuter Bus`</li><li>`Ferry`</li><li>`Rail Replacement Bus`</li></ul>
 route_fare_class | Experimental | Included | Specifies the fare type of the route, which can differ from the service category. This proposal uses this field instead of using [fare_rules.txt](#fare_rulestxt) and [fare_attributes.txt](#fare_attributestxt) as those files currently do not support the entirety of the MBTA's fare and transfer policies For public-facing applications, we recommend that use and display of route_fare_class be equally or more prominent than `route_desc`, as passengers often identify routes by their fares..<br><br>**Possible values for the MBTA implementation:**<ul><li>`Local Bus`</li><li>`Inner Express`</li><li>`Outer Express`</li><li>`Rapid Transit`</li><li>`Commuter Rail`</li><li>`Ferry`</li><li>`Free`</li><li>`Special`</li></ul>
 route_type | Required | Included | Indicates the type of vehicle that operates the route. It is not recommended to use this field's values to categorize MBTA service. 
 route_url | Optional | Included (some records) | 
