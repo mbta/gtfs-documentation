@@ -31,15 +31,15 @@ Table Name | GTFS spec | Status | Notes
 [calendar_attributes.txt](#calendar_attributestxt) | Experimental | Included | Adds human-readable names and further context to calendar `service_id`s.
 [calendar_dates.txt](#calendar_datestxt) | Optional | Included | Generated programatically. May not be easy for humans to read.
 [checkpoints.txt](#checkpointstxt) | Experimental | Included | Similar in part to [stops.txt](#stopstxt), this table provides human-readable names to checkpoints from [stop_times.txt](#stop_timestxt).
-[directions.txt](#directionstxt) | Experimental | Included | Provides for passenger-facing names to be documented for direction_id on a route-by-route basis.
+[directions.txt](#directionstxt) | Experimental | Included | Provides for passenger-facing names to be documented for `direction_id` on a route-by-route basis.
 [facilities.txt](#facilitiestxt) | Experimental | Included | Station amenities such as elevators, escalators, parking lots, and bike storage.
 [facilities_properties.txt](#facilities_propertiestxt) | Experimental | Included | Properties of station amenities in [facilities.txt](#facilitiestxt).
-[facilities_properties_definitions.txt](#facilities_properties_definitionstxt) | Experimental | Included | Definitions of the property_ids and values used in [facilities_properties.txt](#facilities_propertiestxt).
+[facilities_properties_definitions.txt](#facilities_properties_definitionstxt) | Experimental | Included | Definitions of the `property_id`s and `value`s used in [facilities_properties.txt](#facilities_propertiestxt).
 [fare_attributes.txt](#fare_attributestxt) | Optional | N/A |
 [fare_rules.txt](#fare_rulestxt) | Optional | N/A |
 [feed_info.txt](#feed_infotxt) | Optional | Included |
 [frequencies.txt](#frequenciestxt) | Optional | N/A | 
-[levels.txt](#levelstxt) | Experimental | Included | Provides relative elevation information for stop_ids (including boarding platforms and station entrances) within a parent station.
+[levels.txt](#levelstxt) | Optional | Included | Provides relative elevation information for `stop_id`s (including boarding platforms, station entrances, and generic nodes) within a parent station.
 [lines.txt](#linestxt) | Experimental | Included | Groups similar routes (such as those which serve the same trunk corridor or bus terminal) for the purpose of customer display.
 [linked_datasets.txt](#linked_datasetstxt) | Experimental | Included | URLs to linked GTFS-realtime datasets: Trip Updates, Vehicle Positions and Service Alerts.
 [multi_route_trips.txt](#multi_route_tripstxt) | Experimental | Included | For trips that travel on more than one route, this file identifies additional routes with which the trip should be associated.
@@ -169,14 +169,13 @@ feed_contact_email | Optional | Included | An email address for communication re
 
 ## levels.txt
 
-Experimental file used to describe the vertical levels within a station. level_ids can be applied to stops in **stops.txt**. [Learn more about the levels extension to GTFS.](https://github.com/google/transit/pull/86)
+Used to describe the vertical levels within a station. `level_id`s can be applied to stops in [stops.txt](#stopstxt). [Learn more about the recent introduction of levels to GTFS.](https://github.com/google/transit/pull/143)
 
 Field Name | GTFS spec | Status | Notes
 ---------- | -------- | ------ | --------
-level_id | Experimental | Included | The `level_id` field contains an ID that uniquely identifies the level. The `level_id` is dataset unique.
-level_index | Experimental | Included | Relative position of a level. In general, a value of `0` indicates the ground (or street) level, position values indicate levels above ground, and negative values indicate levels below ground. For some stations on slopes, it may be necessary to have multiple levels to represent adjacent streets, if the streets are at different elevations.
-level_name | Experimental | Included | 
-level_elevation | Experimental (empty) | Included | 
+level_id | Required | Included | The `level_id` field contains an ID that uniquely identifies the level. The `level_id` is dataset unique.
+level_index | Required | Included | Relative position of a level. In general, a value of `0` indicates the ground (or street) level, position values indicate levels above ground, and negative values indicate levels below ground. For some stations on slopes, it may be necessary to have multiple levels to represent adjacent streets, if the streets are at different elevations.
+level_name | Optional | Included |
 
 ## lines.txt
 
@@ -220,26 +219,27 @@ trip_id | Experimental | Included | The `trip_id` of the trip which has the addi
 
 ## pathways.txt
 
-Experimental file used to describe the various pedestrian paths of travel within and around a station. [Learn more about the pathways extension to GTFS.](https://github.com/google/transit/pull/86)
+Experimental file used to describe the various pedestrian paths of travel within and around a station. [Learn more about the recent introduction of pathways to GTFS.](https://github.com/google/transit/pull/143)
 
-At this time, the MBTA implementation pathways does not include all stations. For those stations for which we show pathways, we show a single `pathway_id` between a pair of platforms, or between a platform and station entrance, with the `traversal_time` and `wheelchair_traversal_time` incorporating time estimates of distance traveled, as well as escalator and elevator travel times.
+At this time, the MBTA implementation of pathways does not include all stations, with additional stations being added to the file continually.
 
 Field Name | GTFS spec | Status | Notes
 ---------- | ------- | ------- | --------
-pathway_id | Experimental | Included | The `pathway_id` field contains an ID that uniquely identifies the pathway. The `pathway_id` is dataset unique.
-from_stop_id | Experimental | Included | Stop IDs are referenced from the [stops.txt](#stopstxt) file.
-to_stop_id | Experimental | Included | Stop IDs are referenced from the [stops.txt](#stopstxt) file.
-facility_id | Experimental | Included (empty) | This additional field, while not in the official proposal, will be used by the MBTA in the near future to link pathways to facilities (in [facilities.txt](#facilitiestxt)) which may be required to be transversed, such as elevators.
-pathway_mode | Experimental | Included | The value `0` is currently used for all pathways in the MBTA GTFS file
-pathway_type | Experimental | Included | The `pathway_type` field specifies the type of connection. Valid values for this field are:<ul><li>`1`: Connects station locations to an entrance</li><li>`2`: Connects stops/stations for transfers off the streets or within stations</li><li>`3`: Connects stops/stations/entrances for transfers on the streets</li></ul>
-traversal_time | Experimental | Included | 
-wheelchair_traversal_time | Experimental | Included | 
-ramp_slope | Experimental | Included (empty) | 
-stair_count | Experimental | Included (empty) | 
+pathway_id | Required | Included | The `pathway_id` field contains an ID that uniquely identifies the pathway. The `pathway_id` is dataset unique.
+from_stop_id | Required | Included | Stop IDs are referenced from the [stops.txt](#stopstxt) file, and include service stops, station entrances, and generic nodes.
+to_stop_id | Required | Included | Stop IDs are referenced from the [stops.txt](#stopstxt) file, and include service stops, station entrances, and generic nodes.
+facility_id | Required | Included (empty) | Links pathways to facilities (in [facilities.txt](#facilitiestxt)) which may be required to be transversed, such as escalators and elevators. Can be coupled with real-time alerts feeds/API calls to determine if the pathway is available at a given time.
+pathway_mode | Required | Included | Type of pathway. Values used by the MBTA for this field are:<br><ul><li>`1`: Walkways, including ramps</li><li>`2`: Staircases</li><li>`4`: Escalators</li><li>`5`: Elevators</li><li>`6`: Entering fare control (by passing through fare gates)</li><li>`7`: Exiting fare control (by passing through fare gates or exit-only gates)</li></ul>
+is_bidirectional | Required | Included | For the MBTA implementation, this field will always be `0`. All pathways will be unidirectional.
+length | Optional | Included (some records) | Length will always be provided in meters.
+wheelchair_length | Experimental | Included (some records) | Wheelchair length will always be provided in meters.
+traversal_time | Optional | Included (some records) |
+wheelchair_traversal_time | Experimental | Included (some records) |
+stair_count | Optional | Included (some records) |
 pathway_name | Experimental | Included | Contains description of the path origin and destination.
-pathway_code | Experimental (empty) | Included | 
-signposted_as | Experimental | Included | Contains indication of the path destination as it is signed at the particular station.
-instructions | Experimental (empty) | Included | 
+pathway_code | Experimental | Included (empty) |
+signposted_as | Optional | Included | Contains indication of the path destination as it is signed at the particular station.
+instructions | Experimental | Included (empty) |
 
 ## routes.txt
 
@@ -298,14 +298,14 @@ stop_name | Required | Included | For most bus stops, indicates geographic locat
 stop_desc | Optional | Included (some records) | For stops with a `parent_station` value, indicates the name of the station and that of the specific boarding location.<br><br>For example, the platform toward Ashmont and Braintree on the Red Line at Park Street will have a `stop_desc` of `Park Street - Red Line - Ashmont/Braintree`.
 platform_code | Experimental | Included (some records) | Indicates the platform identifier for a platform stop (e.g. `G` or `3`), if one is signed at a station. Many stations will not have `platform_code`s. Words like "platform" or "track" are not included.<br><br>For example, the platform toward Ashmont and Braintree on the Red Line at Park Street will have a `platform_code` of `5`.
 platform_name | Experimental | Included (some records) | Indicates the platform name as labeled at a station, often indicating the direction or destination of services passing through a platform. Words like "platform" or "track" (or the feed's language-specific equivalent) should not be included.<br><br>For example, the platform toward Ashmont and Braintree on the Red Line at Park Street will have a `platform_name` of `Ashmont/Braintree`.
-stop_lat | Required | Included | Children stops with a `parent_station` may have different `stop_lat` value as that of the parent.
-stop_lon | Required | Included | Children stops with a `parent_station` may have different `stop_lon` value as that of the parent.
+stop_lat | Required | Included (some records) | Children stops with a `parent_station` may have different `stop_lat` value as that of the parent. Generic nodes (having a `location_type` of `3`) may not have a `stop_lat`.
+stop_lon | Required | Included (some records) | Children stops with a `parent_station` may have different `stop_lon` value as that of the parent. Generic nodes (having a `location_type` of `3`) may not have a `stop_lon`.
 zone_id | Optional | Included (some records) | Populated with Commuter Rail fare zone information at Commuter Rail stations and stops. Special values may be applied at stations at which multiple fare zones or where special event fares are in effect.
 stop_address | Experimental | Included (some records) | Optional field which allows a stop to have included a human-readable address.
 stop_url | Optional | Included (some records) | Populated for stops which are not entrances, as defined by having a `location_type` of `2`.
 level_id | Experimental | Included (some records) | Reference to vertical station level from [levels.txt](#levelstxt).
-location_type | Optional | Included | A value of `2` designates a station entrance/exit, whereas `0` indicates a distinct boarding location, and `1` indicates a parent station complex.
-parent_station | Optional | Included (some records) | For subway stations, the `parent_station`'s `stop_id` represents the whole facility and the child stop represents a specific platform. Use for identifying a station and indicating where specifically to enter a vehicle, respectively.<br><br>All subway stops have a parent station. If a commuter rail stop also serves the subway, then it will have a parent station. Future updates will add parent stations for all commuter rail stops.
+location_type | Optional | Included | A value of `1` indicates a parent station complex, whereas `2` designates a station entrance/exit, `0` indicates a distinct boarding location, and `3` indicates a generic node within a station, such as the end of a staircase, elevator, or escalator.
+parent_station | Optional | Included (some records) | For subway stations, the `parent_station`'s `stop_id` represents the whole facility and the child stop represents a specific platform, entrance, or a generic node (such as the end of a staircase or elevator). Use for identifying a station and indicating where specifically to access a vehicle or station.<br><br>All subway stops have a parent station. If a commuter rail stop also serves the subway, then it will have a parent station. Future updates will add parent stations for all commuter rail stops.
 stop_timezone | Optional | N/A | 
 wheelchair_boarding | Optional | Included | Additional guidance for bus stops only:<ul><li>`0`: Minor to moderate accessibility barriers exist at the stop. Bus operator may need to relocate bus for safe boarding and exiting.</li><li>`2`: Significant accessibility barriers exist at the stop. Customers using wheeled mobility devices may need to board at street level.</li></ul>
 
