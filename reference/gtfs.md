@@ -231,10 +231,10 @@ to_stop_id | Required | Included | Stop IDs are referenced from the [stops.txt](
 facility_id | Required | Included (empty) | Links pathways to facilities (in [facilities.txt](#facilitiestxt)) which may be required to be transversed, such as escalators and elevators. Can be coupled with real-time alerts feeds/API calls to determine if the pathway is available at a given time.
 pathway_mode | Required | Included | Type of pathway. Values used by the MBTA for this field are:<br><ul><li>`1`: Walkways, including ramps</li><li>`2`: Staircases</li><li>`4`: Escalators</li><li>`5`: Elevators</li><li>`6`: Entering fare control (by passing through fare gates)</li><li>`7`: Exiting fare control (by passing through fare gates or exit-only gates)</li></ul>
 is_bidirectional | Required | Included | For the MBTA implementation, this field will always be `0`. All pathways will be unidirectional.
-length | Optional | Included (some records) | Length will always be provided in meters.
-wheelchair_length | Experimental | Included (some records) | Wheelchair length will always be provided in meters.
-traversal_time | Optional | Included (some records) |
-wheelchair_traversal_time | Experimental | Included (some records) |
+length | Optional | Included (some records) | Length is provided in meters.
+wheelchair_length | Experimental | Included (some records) | This field is temporarily added for backward compatibility alongside `wheelchair_traversal_time` and will be deprecated and removed in the future. Wheelchair length is provided in meters.
+traversal_time | Optional | Included (some records) | Traversal time is provided in seconds.
+wheelchair_traversal_time | Experimental | Included (some records) | This field is included for backward compatibility and will be deprecated and removed in the future. Wheelchair traversal time is provided in seconds.
 stair_count | Optional | Included (some records) |
 pathway_name | Experimental | Included | Contains description of the path origin and destination.
 pathway_code | Experimental | Included (empty) |
@@ -302,7 +302,7 @@ stop_lat | Required | Included (some records) | Children stops with a `parent_st
 stop_lon | Required | Included (some records) | Children stops with a `parent_station` may have different `stop_lon` value as that of the parent. Generic nodes (having a `location_type` of `3`) may not have a `stop_lon`.
 zone_id | Optional | Included (some records) | Populated with Commuter Rail fare zone information at Commuter Rail stations and stops. Special values may be applied at stations at which multiple fare zones or where special event fares are in effect.
 stop_address | Experimental | Included (some records) | Optional field which allows a stop to have included a human-readable address.
-stop_url | Optional | Included (some records) | Populated for stops which are not entrances, as defined by having a `location_type` of `2`.
+stop_url | Optional | Included (some records) | Populated for stops which are parent stations (`location_type` of `1`) or scheduled boarding locations (`location_type` of `0`).
 level_id | Experimental | Included (some records) | Reference to vertical station level from [levels.txt](#levelstxt).
 location_type | Optional | Included | A value of `1` indicates a parent station complex, whereas `2` designates a station entrance/exit, `0` indicates a distinct boarding location, and `3` indicates a generic node within a station, such as the end of a staircase, elevator, or escalator.
 parent_station | Optional | Included (some records) | For subway stations, the `parent_station`'s `stop_id` represents the whole facility and the child stop represents a specific platform, entrance, or a generic node (such as the end of a staircase or elevator). Use for identifying a station and indicating where specifically to access a vehicle or station.<br><br>All subway stops have a parent station. If a commuter rail stop also serves the subway, then it will have a parent station. Future updates will add parent stations for all commuter rail stops.
