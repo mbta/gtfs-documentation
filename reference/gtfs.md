@@ -287,7 +287,7 @@ platform_code | Experimental | Included (some records) | Indicates the platform 
 platform_name | Experimental | Included (some records) | Indicates the platform name as labeled at a station, often indicating the direction or destination of services passing through a platform. Words like "platform" or "track" (or the feed's language-specific equivalent) should not be included.<br><br>For example, the platform toward Ashmont and Braintree on the Red Line at Park Street will have a `platform_name` of `Ashmont/Braintree`.
 stop_lat | Required | Included | Children stops with a `parent_station` may have different `stop_lat` value as that of the parent.
 stop_lon | Required | Included | Children stops with a `parent_station` may have different `stop_lon` value as that of the parent.
-zone_id | Optional | Included (empty) | 
+zone_id | Optional | Included (some records) | Populated with Commuter Rail fare zone information at Commuter Rail stations and stops. Special values may be applied at stations at which multiple fare zones or where special event fares are in effect.
 stop_address | Experimental | Included (some records) | Optional field which allows a stop to have included a human-readable address.
 stop_url | Optional | Included (some records) | Populated for stops which are not entrances, as defined by having a `location_type` of `2`.
 level_id | Experimental | Included (some records) | Reference to vertical station level from [levels.txt](#levelstxt).
