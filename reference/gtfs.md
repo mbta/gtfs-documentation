@@ -236,6 +236,7 @@ wheelchair_length | Experimental | Included (some records) | This field is tempo
 traversal_time | Optional | Included (some records) | Traversal time is provided in seconds.
 wheelchair_traversal_time | Experimental | Included (some records) | This field is included for backward compatibility and will be deprecated and removed in the future. Wheelchair traversal time is provided in seconds.
 stair_count | Optional | Included (some records) |
+max_slope | Optional | Included (some records) | Will be populated and non-zero for sloped pathways.
 pathway_name | Experimental | Included | Contains description of the path origin and destination.
 pathway_code | Experimental | Included (empty) |
 signposted_as | Optional | Included | Contains indication of the path destination as it is signed at the particular station.
