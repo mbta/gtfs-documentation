@@ -43,7 +43,7 @@ Table Name | GTFS spec | Status | Notes
 [lines.txt](#linestxt) | Experimental | Included | Groups similar routes (such as those which serve the same trunk corridor or bus terminal) for the purpose of customer display.
 [linked_datasets.txt](#linked_datasetstxt) | Experimental | Included | URLs to linked GTFS-realtime datasets: Trip Updates, Vehicle Positions and Service Alerts.
 [multi_route_trips.txt](#multi_route_tripstxt) | Experimental | Included | For trips that travel on more than one route, this file identifies additional routes with which the trip should be associated.
-[pathways.txt](#pathwaystxt) | Experimental | Included | Information and travel times about paths within and out of parent stations, including paths between platforms and to/from station entrances.
+[pathways.txt](#pathwaystxt) | Optional | Included | Information, including travel times and lengths, about paths within and out of parent stations, including paths between platforms and to/from station entrances.
 [routes.txt](#routestxt) | Required | Included |
 [route_patterns.txt](#route_patternstxt) | Experimental | Included | Information about the different variations of service that may be run within a single `route_id`, including when and how often they are operated.
 [shapes.txt](#shapestxt) | Optional | Included |
@@ -219,7 +219,7 @@ trip_id | Experimental | Included | The `trip_id` of the trip which has the addi
 
 ## pathways.txt
 
-Experimental file used to describe the various pedestrian paths of travel within and around a station. [Learn more about the recent introduction of pathways to GTFS.](https://github.com/google/transit/pull/143)
+Describes the various pedestrian paths of travel within and around a station. [Learn more about the recent introduction of pathways to GTFS.](https://github.com/google/transit/pull/143)
 
 At this time, the MBTA implementation of pathways does not include all stations, with additional stations being added to the file continually.
 
@@ -228,14 +228,14 @@ Field Name | GTFS spec | Status | Notes
 pathway_id | Required | Included | The `pathway_id` field contains an ID that uniquely identifies the pathway. The `pathway_id` is dataset unique.
 from_stop_id | Required | Included | Stop IDs are referenced from the [stops.txt](#stopstxt) file, and include service stops, station entrances, and generic nodes.
 to_stop_id | Required | Included | Stop IDs are referenced from the [stops.txt](#stopstxt) file, and include service stops, station entrances, and generic nodes.
-facility_id | Required | Included (empty) | Links pathways to facilities (in [facilities.txt](#facilitiestxt)) which may be required to be transversed, such as escalators and elevators. Can be coupled with real-time alerts feeds/API calls to determine if the pathway is available at a given time.
+facility_id | Required | Included (some records) | Links pathways to facilities (in [facilities.txt](#facilitiestxt)) which may be required to be transversed, such as escalators and elevators. Can be coupled with real-time alerts feeds/API calls to determine if the pathway is available at a given time.
 pathway_mode | Required | Included | Type of pathway. Values used by the MBTA for this field are:<br><ul><li>`1`: Walkways, including ramps</li><li>`2`: Staircases</li><li>`4`: Escalators</li><li>`5`: Elevators</li><li>`6`: Entering fare control (by passing through fare gates)</li><li>`7`: Exiting fare control (by passing through fare gates or exit-only gates)</li></ul>
 is_bidirectional | Required | Included | For the MBTA implementation, this field will always be `0`. All pathways will be unidirectional.
 length | Optional | Included (some records) | Length is provided in meters.
 wheelchair_length | Experimental | Included (some records) | This field is temporarily added for backward compatibility alongside `wheelchair_traversal_time` and will be deprecated and removed in the future. Wheelchair length is provided in meters.
 traversal_time | Optional | Included (some records) | Traversal time is provided in seconds.
 wheelchair_traversal_time | Experimental | Included (some records) | This field is included for backward compatibility and will be deprecated and removed in the future. Wheelchair traversal time is provided in seconds.
-stair_count | Optional | Included (some records) |
+stair_count | Optional | Included (some records) | Number of stairs required to traverse, in positive integers if stairs are to be ascended, and in negative integers if stairs are to be descended.
 max_slope | Optional | Included (some records) | Will be populated and non-zero for sloped pathways.
 pathway_name | Experimental | Included | Contains description of the path origin and destination.
 pathway_code | Experimental | Included (empty) |
