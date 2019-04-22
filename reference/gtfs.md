@@ -41,6 +41,7 @@ Table Name | GTFS spec | Status | Notes
 [frequencies.txt](#frequenciestxt) | Optional | N/A | 
 [levels.txt](#levelstxt) | Experimental | Included | Provides relative elevation information for stop_ids (including boarding platforms and station entrances) within a parent station.
 [lines.txt](#linestxt) | Experimental | Included | Groups similar routes (such as those which serve the same trunk corridor or bus terminal) for the purpose of customer display.
+[linked_datasets.txt](#linked_datasetstxt) | Experimental | Included | URLs to linked GTFS-realtime datasets: Trip Updates, Vehicle Positions and Service Alerts.
 [multi_route_trips.txt](#multi_route_tripstxt) | Experimental | Included | For trips that travel on more than one route, this file identifies additional routes with which the trip should be associated.
 [pathways.txt](#pathwaystxt) | Experimental | Included | Information and travel times about paths within and out of parent stations, including paths between platforms and to/from station entrances.
 [routes.txt](#routestxt) | Required | Included |
@@ -191,6 +192,18 @@ line_url | Experimental | Included (empty) | Contains the URL of a web page abou
 line_color | Experimental | Included | In systems that have colors assigned to lines, the route_color field defines a color that corresponds to a line. The color must be provided as a six-character hexadecimal number, for example, `00FFFF`. If no color is specified, the default route color is white (`FFFFFF`).
 line_text_color | Experimental | Included | This field can be used to specify a legible color to use for text drawn against a background of line_color. The color must be provided as a six-character hexadecimal number, for example, `FFD700`. If no color is specified, the default text color is black (`000000`).
 line_sort_order | Experimental | Included | The `line_sort_order` field can be used to order the lines in a way which is ideal for presentation to customers. It must be a non-negative integer. Lines with smaller `line_sort_order` values should be displayed before lines with larger `line_sort_order` values.
+
+## linked_datasets.txt
+
+Experimental file containing URLs and authentication information for linked GTFS-realtime datasets: Trip Updates, Vehicle Positions and Service Alerts. [Learn more about the proposed linked_datasets extension to GTFS.](https://github.com/google/transit/pull/93)
+
+Field Name | GTFS spec | Status | Notes
+---------- | -------- | ------ | --------
+url | Experimental | Included | Contains the URL to the linked dataset.
+trip_updates | Experimental | Included | Indicates whether the dataset at the specified URL may contain [a `TripUpdate` entity](https://github.com/google/transit/blob/master/gtfs-realtime/spec/en/reference.md#message-tripupdate). Valid values are `0` if the dataset does not contain TripUpdate entities, or `1` if the dataset may contain TripUpdate entities.
+vehicle_positions | Experimental | Included | Indicates whether the dataset at the specified URL may contain [a `VehiclePosition` entity](https://github.com/google/transit/blob/master/gtfs-realtime/spec/en/reference.md#message-vehicleposition). Valid values are `0` if the dataset does not contain VehiclePosition entities, or `1` if the dataset may contain VehiclePosition entities.
+service_alerts | Experimental | Included | Indicates whether the dataset at the specified URL may contain [an `Alert` entity](https://github.com/google/transit/blob/master/gtfs-realtime/spec/en/reference.md#message-alert). Valid values are `0` if the dataset does not contain Alert entities, or `1` if the dataset may contain Alert entities.
+authentication_type | Experimental | Included | Defines the type of authentication required to access the URL. Presently, all included URLs have a value of `0` indicating that no authentication is required.
 
 ## multi_route_trips.txt
 
