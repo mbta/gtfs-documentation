@@ -173,8 +173,8 @@ Used to describe the vertical levels within a station. `level_id`s can be applie
 
 Field Name | GTFS spec | Status | Notes
 ---------- | -------- | ------ | --------
-level_id | Required | Included | The `level_id` field contains an ID that uniquely identifies the level. The `level_id` is dataset unique.
-level_index | Required | Included | Relative position of a level. In general, a value of `0` indicates the ground (or street) level, position values indicate levels above ground, and negative values indicate levels below ground. For some stations on slopes, it may be necessary to have multiple levels to represent adjacent streets, if the streets are at different elevations.
+level_id | Required | Included | The `level_id` field contains an ID that uniquely identifies the level. The `level_id` is dataset unique. Reuse of `level_id`s within different stations does not imply that the stations are connected together.
+level_index | Required | Included | Relative position of a level within a single station. In general, a value of `0` indicates the ground (or street) level, position values indicate levels above ground, and negative values indicate levels below ground. For some stations on slopes, it may be necessary to have multiple levels to represent adjacent streets, if the streets are at different elevations.
 level_name | Optional | Included |
 
 ## lines.txt
@@ -228,7 +228,7 @@ Field Name | GTFS spec | Status | Notes
 pathway_id | Required | Included | The `pathway_id` field contains an ID that uniquely identifies the pathway. The `pathway_id` is dataset unique.
 from_stop_id | Required | Included | Stop IDs are referenced from the [stops.txt](#stopstxt) file, and include service stops, station entrances, and generic nodes.
 to_stop_id | Required | Included | Stop IDs are referenced from the [stops.txt](#stopstxt) file, and include service stops, station entrances, and generic nodes.
-facility_id | Required | Included (some records) | Links pathways to facilities (in [facilities.txt](#facilitiestxt)) which may be required to be transversed, such as escalators and elevators. Can be coupled with real-time alerts feeds/API calls to determine if the pathway is available at a given time.
+facility_id | Experimental | Included (some records) | Links pathways to facilities (in [facilities.txt](#facilitiestxt)) which may be required to be transversed, such as escalators and elevators. Can be coupled with real-time alerts feeds/API calls to determine if the pathway is available at a given time.
 pathway_mode | Required | Included | Type of pathway. Values used by the MBTA for this field are:<br><ul><li>`1`: Walkways, including ramps</li><li>`2`: Staircases</li><li>`4`: Escalators</li><li>`5`: Elevators</li><li>`6`: Entering fare control (by passing through fare gates)</li><li>`7`: Exiting fare control (by passing through fare gates or exit-only gates)</li></ul>
 is_bidirectional | Required | Included | For the MBTA implementation, this field will always be `0`. All pathways will be unidirectional.
 length | Optional | Included (some records) | Length is provided in meters.
