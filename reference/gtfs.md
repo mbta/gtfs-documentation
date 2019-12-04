@@ -239,7 +239,7 @@ stair_count | Optional | Included (some records) | Number of stairs required to 
 max_slope | Optional | Included (some records) | Will be populated and non-zero for sloped pathways.
 pathway_name | Experimental | Included | Contains description of the path origin and destination.
 pathway_code | Experimental | Included (empty) |
-signposted_as | Optional | Included | Contains indication of the path destination as it is signed at the particular station.
+signposted_as | Optional | Included (some records) | Contains indication of the path destination as it is signed at the particular station. If no such signage exists, the field will be blank.
 instructions | Experimental | Included (empty) |
 
 ## routes.txt
