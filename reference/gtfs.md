@@ -323,7 +323,7 @@ arrival_time | Required | Included |
 departure_time | Required | Included | 
 stop_id | Required | Included (persistent) | 
 stop_sequence | Required | Included | 
-stop_headsign | Optional | Included (empty) | While not currently used, this field is expected to be used in the future and should be handled by feed users. 
+stop_headsign | Optional | Included (some records) | Currently only used on commuter rail.
 pickup_type | Optional | Included | On commuter rail, a `pickup_type` of 3 represents a commuter rail "flag" stop marked with "F" on the schedule. Customer must visible to the approaching train to board.<br><br>On certain bus routes, a `pickup_type` of 3 represents continuous pickup: The bus will stop at any safe location between GTFS stops to pick up passengers. Customer must wave at the driver to board.
 drop_off_type | Optional | Included | On commuter rail, a `drop_off_type` of 3 represents a commuter rail "flag" stop marked with "F" on the schedule. Customer must notify the conductor to exit.<br><br>On certain bus routes, a `drop_off_type` of 3 represents continuous drop off: The bus will stop at any safe location between GTFS stops to drop off passengers. Customer must notify the driver to exit.
 shape_dist_traveled | Optional | N/A | 
