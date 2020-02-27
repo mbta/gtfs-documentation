@@ -95,7 +95,7 @@ service_schedule_type | Experimental | Included | Description of the schedule ty
 service_schedule_typicality | Experimental | Included | Describes how well this schedule represents typical service for the listed `service_schedule_type`. Current valid values are:<ul><li>`0` (or empty): Not defined.</li><li>`1`: Typical service with perhaps minor modifications</li><li>`2`: Extra service supplements typical schedules</li><li>`3`: Reduced holiday service is provided by typical Saturday or Sunday schedule</li><li>`4`: Major changes in service due to a planned disruption, such as construction</li><li>`5`: Major reductions in service for weather events or other atypical situations</li></ul>
 rating_start_date | Experimental | Included | Start date of the schedule rating of which this service is a part. It will be earlier than or equal to the service's `start_date`.
 rating_end_date | Experimental | Included | End date of the schedule rating of which this service is a part. It will be later than or equal to the service's `end_date`. This value may be null, in which case the schedule rating is effective from the `rating_start_date` until further notice.
-rating_description | Experimental | Included | Human-readable name of this schedule rating. Typically will be "Winter", "Spring", "Summer", or "Fall". This value may be null, as is the case for the Ferry, when the schedule rating is long running and not expected to have regular updates.
+rating_description | Experimental | Included | Human-readable name of this schedule rating. Typically will be "Winter", "Spring", "Summer", or "Fall". This value may be null, as is the case for the Ferry, when the schedule rating is not expected to have regular updates.
 
 ## calendar_dates.txt
 
