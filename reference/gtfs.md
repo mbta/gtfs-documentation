@@ -345,6 +345,8 @@ min_walk_time | Experimental | Included (some records) | Minimum time required t
 min_wheelchair_time | Experimental | Included (some records) | Minimum time required to travel by wheelchair `from_stop_id` to `to_stop_id`. If the transfer is not wheelchair accessible, this field will be blank.
 suggested_buffer_time | Experimental | Included (some records) | Recommended buffer time to allow to make a successful transfer between two services. This is also partly based on the significance of missing the transfer (due to service frequency).
 wheelchair_transfer | Experimental | Included (some records) | Identifies whether a transfer is accessible to customers using a wheelchair. The field can have the following values:<ul><li>`0` (or empty): indicates that there is no accessibility information for the transfer</li><li>`1`: indicates that the transfer is wheelchair accessible</li><li>`2`: transfer not accessible to persons in wheelchairs</li></ul>
+from_trip_id | Experimental | Included (some records) | If present, specifies that the transfer is exclusively valid from this trip to the trip specified in `to_trip_id`.
+to_trip_id | Experimental | Included (some records) | If present, specifies that the transfer is exclusively valid to this trip from the trip specified in `from_trip_id`.
 
 ## trips.txt
 
