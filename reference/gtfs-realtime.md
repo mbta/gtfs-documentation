@@ -23,14 +23,20 @@ information is not reproduced here.
 * **Trip Updates:** https://cdn.mbta.com/realtime/TripUpdates.pb
 * **Vehicle Positions:** https://cdn.mbta.com/realtime/VehiclePositions.pb
 
-### Experimental features
+### Experimental fields
 
-* [`Alert`][ma]: The experimental `severity_level` field is supported.
-* [`EntitySelector`][mes]: The experimental `direction_id` field is supported.
-* [`TripDescriptor`][mtd]: The experimental `direction_id` field is supported.
-* [`VehiclePosition`][mvp]: The experimental `occupancy_status` field is
-  supported. The values used are `MANY_SEATS_AVAILABLE`, `FEW_SEATS_AVAILABLE`,
-  and `FULL`.
+The following experimental fields are provided:
+
+Message | Field | Notes
+------- | ----- | -----
+[`Alert`][ma] | `severity_level` |
+[`EntitySelector`][mes] | `direction_id` |
+[`TripDescriptor`][mtd] | `direction_id` |
+[`VehiclePosition`][mvp] | `occupancy_percentage` |
+[`VehiclePosition`][mvp] | `occupancy_status` | The values used are `MANY_SEATS_AVAILABLE`, `FEW_SEATS_AVAILABLE`, and `FULL`.
+
+Occupancy data is only available for certain routes and vehicles. For details,
+see the MBTA's [Crowding Information][crowding] page.
 
 
 ## JSON feeds
@@ -70,7 +76,8 @@ fields that are not part of the GTFS Realtime specification.
 Message | Field | Type | Cardinality | Required | Description
 ------- | ----- | ---- | ----------- | -------- | -----------
 [`EntitySelector`][mes] | `activities` | [Activity](#enum-activity) | Many | Required | Describes the activities impacted by an alert with regard to the selected entity.
-[`StopTimeUpdate`][mstu] | `boarding_status` | string | One | Optional | Short English-language string that describes the boarding status of the stop time, for example _"On time"_, _"Now boarding"_, or _"Departed"_. Only provided for Commuter Rail trips.
+[`StopTimeUpdate`][mstu] | `boarding_status` | string | One | Optional | Describes the boarding status of the stop time as a short English-language string, for example _"On time"_, _"Now boarding"_, or _"Departed"_. Only provided for Commuter Rail trips.
+[`TripDescriptor`][mtd] | `route_pattern_id` | string | One | Optional | Indicates the route pattern the described trip belongs to (from [route_patterns.txt](gtfs.md#route_patternstxt) in GTFS).
 [`VehicleDescriptor`][mvd] | `consist` | [Consist](#message-consist) | Many | Optional | Information about the individual rail cars that make up the vehicle. Only provided for subway and light rail vehicles.
 
 The enhanced feeds may include fields other than those listed here. Such fields
@@ -106,6 +113,7 @@ Field | Type | Cardinality | Required | Description
 
 
 [rt-docs]: https://github.com/google/transit/tree/master/gtfs
+[crowding]: https://www.mbta.com/projects/crowding-information-riders
 [ma]: https://github.com/google/transit/blob/master/gtfs-realtime/spec/en/reference.md#message-alert
 [mes]: https://github.com/google/transit/blob/master/gtfs-realtime/spec/en/reference.md#message-entityselector
 [mstu]: https://github.com/google/transit/blob/master/gtfs-realtime/spec/en/reference.md#message-stoptimeupdate
