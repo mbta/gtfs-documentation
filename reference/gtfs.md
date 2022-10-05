@@ -51,6 +51,8 @@ Table Name | GTFS spec | Status | Notes
 [stop_times.txt](#stop_timestxt) | Required | Included |
 [transfers.txt](#transferstxt) | Optional | Included |
 [trips.txt](#tripstxt) | Required | Included |
+[trips_properties.txt](#trips_propertiestxt) | Experimental | Included | Identifies special properties and notes relating to trips appearing in [trips.txt](#tripstxt).
+[trips_properties_definitions.txt](#trips_properties_definitionstxt) | Experimental | Included | Definitions of the `trip_property_id`s and `value`s used in [trips_properties.txt](#trips_propertiestxt).
 
 ## agency.txt
 
@@ -364,3 +366,19 @@ wheelchair_accessible | Optional | Included | For MBTA vehicles that are wheelch
 trip_route_type | Experimental | Included (some records) | Indicates the type of vehicle that operates the particular trip if the type of vehicle is not the same as specified in the route's `route_type` (i.e. if part of Blue Line subway service is replaced with a shuttle bus for one weekend). Definitions match those of `route_type`. For most trips, this is empty.
 route_pattern_id | Experimental | Included | Indicates the pattern of a route that a particuar trip will operate. Values linked to those in [route_patterns.txt](#route_patternstxt).
 bikes_allowed | Optional | Included | `1` if bikes are allowed on the trip, `2` if they are not. Empty or `0` values make no claim to whether bikes are allowed.
+
+## trips_properties.txt
+
+Field Name | GTFS spec | Status | Notes
+---------- | -------- | ------ | --------
+trip_id | Experimental | Included | Uniquely identifies each trip as defined in [trips.txt](#tripstxt). Does not need to be unique within this table.
+trip_property_id | Experimental | Included | Property for which details are provided in the `value` field. This may, for example, be a general text note, or designate a trip as being supplemental.
+value | Experimental | Included | Value corresponding to a particular property for a `trip_id`.
+
+## trips_properties_definitions.txt
+
+Field Name | GTFS spec | Status | Notes
+---------- | -------- | ------ | --------
+trip_property_id | Experimental | Included | Trip property ID which is referenced from the property field in [trips_properties.txt](#trips_propertiestxt).
+definition | Experimental | Included | Text describing the associated `trip_property_id` and its intended usage.
+possible_values | Experimental | Included | Text describing the allowed values and format of the `trip_property_id`'s respective value field.
