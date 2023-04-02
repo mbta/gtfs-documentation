@@ -27,6 +27,8 @@ The MBTA GTFS feed is available from the following URL: [https://cdn.mbta.com/MB
 Table Name | GTFS spec | Status | Notes
 ---------- | ---------| ------- | ---------
 [agency.txt](#agencytxt) | Required | Included |
+[areas.txt](#areastxt) | Optional | Included | Provides labels for groupings of locations further defined in [stop_areas.txt](#stop_areastxt).
+[attributions.txt](#attributionstxt) | Optional | N/A |
 [calendar.txt](#calendartxt) | Required | Included | Generated programatically. May not be easy for humans to read.
 [calendar_attributes.txt](#calendar_attributestxt) | Experimental | Included | Adds human-readable names and further context to calendar `service_id`s.
 [calendar_dates.txt](#calendar_datestxt) | Optional | Included | Generated programatically. May not be easy for humans to read.
@@ -36,7 +38,11 @@ Table Name | GTFS spec | Status | Notes
 [facilities_properties.txt](#facilities_propertiestxt) | Experimental | Included | Properties of station amenities in [facilities.txt](#facilitiestxt).
 [facilities_properties_definitions.txt](#facilities_properties_definitionstxt) | Experimental | Included | Definitions of the `property_id`s and `value`s used in [facilities_properties.txt](#facilities_propertiestxt).
 [fare_attributes.txt](#fare_attributestxt) | Optional | N/A |
+[fare_leg_rules.txt](#fare_leg_rulestxt) | Optional | Included | Rules for calculating fares for individual legs of travel. Does not include all possible MBTA fares.
+[fare_media.txt](#fare_mediatxt) | Optional | Included | Describes selected media that can be utilized to use fare products.
+[fare_products.txt](#fare_productstxt) | Optional | Included | Describes different types of fares that can be purchased by riders. Does not include all possible MBTA fares.
 [fare_rules.txt](#fare_rulestxt) | Optional | N/A |
+[fare_transfer_rules.txt](#fare_transfer_rulestxt) | Optional | Included | Rules for calculating fares for transfers between legs of travel.
 [feed_info.txt](#feed_infotxt) | Optional | Included |
 [frequencies.txt](#frequenciestxt) | Optional | N/A | 
 [levels.txt](#levelstxt) | Optional | Included | Provides relative elevation information for `stop_id`s (including boarding platforms, station entrances, and generic nodes) within a parent station.
@@ -48,8 +54,10 @@ Table Name | GTFS spec | Status | Notes
 [route_patterns.txt](#route_patternstxt) | Experimental | Included | Information about the different variations of service that may be run within a single `route_id`, including when and how often they are operated.
 [shapes.txt](#shapestxt) | Optional | Included |
 [stops.txt](#stopstxt) | Required | Included |
+[stop_areas.txt](#stop_areastxt) | Optional | Included | Assigns selected stops to area groupings for the purpose of calculating fares.
 [stop_times.txt](#stop_timestxt) | Required | Included |
 [transfers.txt](#transferstxt) | Optional | Included |
+[translations.txt](#translationstxt) | Optional | N/A |
 [trips.txt](#tripstxt) | Required | Included |
 [trips_properties.txt](#trips_propertiestxt) | Experimental | Included | Identifies special properties and notes relating to trips appearing in [trips.txt](#tripstxt).
 [trips_properties_definitions.txt](#trips_properties_definitionstxt) | Experimental | Included | Definitions of the `trip_property_id`s and `value`s used in [trips_properties.txt](#trips_propertiestxt).
@@ -68,6 +76,13 @@ agency_lang | Optional | Included |
 agency_phone | Optional | Included | 
 agency_fare_url | Optional | N/A | 
 agency_email | Optional | N/A | 
+
+## areas.txt
+
+Field Name | GTFS spec| Status | Notes
+---------- | -------- | ------ | -------
+area_id | Required | Included |
+area_name | Optional | Included |
 
 ## calendar.txt
 
@@ -159,6 +174,60 @@ Field Name | GTFS spec | Status | Notes
 property_id | Experimental | Included | Property ID which is referenced from the property field in [facilities_properties.txt](#facilities_propertiestxt).
 definition | Experimental | Included | Text describing the associated `property_id`, its intended usage.
 possible_values | Experimental | Included | Text describing the allowed values and format of the `property_id`'s respective value field.
+
+## fare_leg_rules.txt
+
+Currently describes fare leg rules for full-fare passengers paying walk-up fares. Fares for passengers eligible for reduced fares, as well as those involving the use of passes and stored-value CharlieCards, to be introduced to the MBTA's GTFS at a later date.
+
+More complete information about the MBTA's fares, transfers, and passes can be found at [MBTA.com/fares](https://www.mbta.com/fares). Additionally, [MBTA.com/tariff](https://www.mbta.com/tariff) provides a technical reference for the MBTA's fare policy implementation.
+
+Field Name | GTFS spec | Status | Notes
+---------- | -------- | ------ | --------
+leg_group_id | Optional | Included |
+network_id | Optional | Included |
+from_area_id | Optional | Included |
+to_area_id | Optional | Included |
+fare_product_id | Required | Included |
+transfer_only | Experimental | Included | This is a [proposed Transit extension](https://docs.google.com/document/d/18yWhwR89pQp48VuBNPXK0djLXOtdjWhgC2h6jCC8WPM/edit?usp=sharing) to designate fare rules that may only be considered as as part of a transfer. Consumers of the MBTA's fares data are strongly encouraged to integrate this field to ensure accurate rapid transit fares are calculated. Valid values:<ul><li>`0` (or empty): This rule may be considered regardless of whether any transfer rules apply</li><li>`1`: This rule may only be considered if there is a matching fare transfer rule from the preceding leg to the current leg; a rule with this value can never match the first leg of a journey
+</li></ul>
+
+## fare_media.txt
+
+Details the physical and virtual fare media that can be used for the fares described by [fare_products.txt](#fare_productstxt) and [fare_leg_rules.txt](#fare_leg_rulestxt). CharlieCards to be introduced to this file at a later date.
+
+Field Name | GTFS spec | Status | Notes
+---------- | -------- | ------ | --------
+fare_media_id | Required | Included | 
+fare_media_name | Optional | Included | 
+fare_media_type | Required | Included | 
+
+## fare_products.txt
+
+Promotional fares and unlimited passes may be introduced to this file at a later date. More complete information about the MBTA's fare and pass products can be found at [MBTA.com/fares](https://www.mbta.com/fares).
+
+Field Name | GTFS spec | Status | Notes
+---------- | -------- | ------ | --------
+fare_product_id | Required | Included | 
+fare_product_name | Optional | Included | 
+fare_media_id | Optional | Included | 
+amount | Required | Included | 
+currency | Required | Included | 
+
+## fare_transfer_rules.txt
+
+Only those transfers permitted with CharlieTickets are currently included in this file.
+
+More complete information about the MBTA's allowed transfers, including those not yet found in GTFS, can be found at [MBTA.com/transfers](https://www.mbta.com/fares/transfers).
+
+Field Name | GTFS spec | Status | Notes
+---------- | -------- | ------ | --------
+from_leg_group_id | Optional | Included | 
+to_leg_group_id | Optional | Included | 
+transfer_count | Required | Included | 
+duration_limit | Optional | Included | 
+duration_limit_type | Required | Included | 
+fare_transfer_type | Required | Included | 
+fare_product_id | Optional | Included | 
 
 ## feed_info.txt
 
@@ -256,7 +325,7 @@ agency_id | Optional | Included (persistent) |
 route_short_name | Required | Included (some records) | Populated for service with branches on separate route IDs (such as Green Line or Silver Line) and all MBTA bus services.<br><br>If `route_short_name` is populated for a route, regardless of the presence of `route_long_name`, then "Route `route_short_name`" is an appropriate way to describe the route.
 route_long_name | Required | Included (some records) | Populated for all modes. For rapid transit services with branches (Green Line), both `route_long_name` and `route_short_name` are populated: `route_short_name` containts the branch designation only, and `route_long_name` identifies both the route and the branch.<br><br>For rail-based and ferry services, `route_long_name` identifies a lengthier, commonly-used route identifier, such as "Red Line" or "Providence/Stoughton Line".<br>For bus services only, `route_long_name` provides the typical end points for the route, and should **not** be used as a standalone route identifier.
 route_desc | Optional | Included | Categorizes a route's level of service. For example, identifies whether bus service runs frequently all day, is aimed at weekday commuters, or supplements service on other routes.<br><br>**Possible Values:**<ul><li>`Commuter Rail`</li><li>`Rapid Transit`</li><li>`Local Bus`</li><li>`Key Bus`</li><li>`Supplemental Bus`</li><li>`Community Bus`</li><li>`Commuter Bus`</li><li>`Ferry`</li><li>`Rail Replacement Bus`</li></ul>
-route_fare_class | Experimental | Included | Specifies the fare type of the route, which can differ from the service category. This proposal uses this field instead of using [fare_rules.txt](#fare_rulestxt) and [fare_attributes.txt](#fare_attributestxt) as those files currently do not support the entirety of the MBTA's fare and transfer policies For public-facing applications, we recommend that use and display of route_fare_class be equally or more prominent than `route_desc`, as passengers often identify routes by their fares..<br><br>**Possible values for the MBTA implementation:**<ul><li>`Local Bus`</li><li>`Inner Express`</li><li>`Outer Express`</li><li>`Rapid Transit`</li><li>`Commuter Rail`</li><li>`Ferry`</li><li>`Free`</li><li>`Special`</li></ul>
+route_fare_class | Experimental | Included | Specifies the fare type of the route, which can differ from the service category. This proposal uses this field instead of using [fare_rules.txt](#fare_rulestxt) and [fare_attributes.txt](#fare_attributestxt) as those files currently do not support the entirety of the MBTA's fare and transfer policies For public-facing applications, we recommend that use and display of route_fare_class be equally or more prominent than `route_desc`, as passengers often identify routes by their fares.<br><br>**Possible values for the MBTA implementation:**<ul><li>`Local Bus`</li><li>`Inner Express`</li><li>`Outer Express`</li><li>`Rapid Transit`</li><li>`Commuter Rail`</li><li>`Ferry`</li><li>`Free`</li><li>`Special`</li></ul>
 route_type | Required | Included | Indicates the type of vehicle that operates the route. It is not recommended to use this field's values to categorize MBTA service. 
 route_url | Optional | Included (some records) | 
 route_color | Optional | Included (some records) | 
@@ -264,6 +333,7 @@ route_text_color | Optional | Included (some records) |
 route_sort_order | Optional | Included | Integer value that can be used for ordering routes in a way that is ideal for presentation to customers.
 line_id | Experimental | Included (some records) | References `line_id` values from [lines.txt](#linestxt). Indicates in which grouping of routes this route belongs, if any. For example, `route_id` `62` may have a `line_id` value of `line-6276`. Note that groupings are subject to change without notice.
 listed_route | Experimental | Included (some records) | Indicates whether route should be included in a public-facing list of all routes. This is useful for determining which routes which should not be shown by themselves, but rather part of another route. Most uses of this field should incorporate data from [multi_route_trips.txt](#multi_route_tripstxt). The following values are valid:<ul><li>`0` (or empty): Route should be included in a list of routes.</li><li>`1`: Route should not be included in a public-facing list of routes.</li></ul>For example, in the future, service for route "450W" trips may appear under a `route_id` of `450W`, but with a `listed_route` value of `1`, and all of the route's trips included in [multi_route_trips.txt](#multi_route_tripstxt) to be displayed together with `route_id` `450`.
+network_id | Optional | Included | For use with [fare_leg_rules.txt](#fare_leg_rulestxt).
 
 ## route_patterns.txt
 
@@ -316,6 +386,15 @@ municipality | Experimental | Included (some records) | Lists the name of the ci
 on_street | Experimental | Included (some records) | Provides the full name of the street along which a stop is located. Newer or recently renamed or relocated streets may not properly appear in `on_street`. Populated for most, but not all, bus stops. Not currently populated for rail or ferry stops, nor for stops with `location_type` not equal to `0`.
 at_street | Experimental | Included (some records) | Provides the full name of a stop's nearest cross street. The nearest cross street can be on the same or opposite side of the street as the stop, and thus will not always be the same street as the one referenced in `stop_name`. Newer or recently renamed or relocated streets may not properly appear in `at_street`. Populated for most, but not all, bus stops. Note that `at_street` will not be populated unless `on_street` is also populated.
 vehicle_type | Experimental | Included (some records) | Part of the [Google Transit Extensions to GTFS](https://developers.google.com/transit/gtfs/reference/gtfs-extensions). Describes the mode of transportation used at the stop. Populated for all stops where `location_type` equals `0`, including those which do not have service scheduled in advance. Value definitions match those for `route_type`; for example, the stop `Alewife-02` has a `vehicle_type` of `1`, which defines it as a subway stop.
+
+## stop_areas.txt
+
+Denotes groupings of stops useful in the calculation of fares in [fare_leg_rules.txt](#fare_leg_rulestxt). Typically used to group fare zones for Commuter Rail and express bus routes.
+
+Field Name | GTFS spec | Status | Notes
+---------- | -------- | ------ | --------
+area_id | Required | Included |
+stop_id | Required | Included |
 
 ## stop_times.txt
 
