@@ -199,7 +199,7 @@ Field Name | GTFS spec | Status | Notes
 ---------- | -------- | ------ | --------
 fare_media_id | Required | Included | 
 fare_media_name | Optional | Included | 
-fare_media_type | Required | Included | 
+fare_media_type | Required | Included | Contains usage of the `1` value to represent a physical, paper ticket that allows a passenger to take either a certain number of pre-purchased trips or unlimited trips within a fixed period of time.
 
 ## fare_products.txt
 
