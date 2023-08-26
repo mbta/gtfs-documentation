@@ -244,7 +244,7 @@ feed_id | Experimental | Included | The universally unique identifier for the GT
 
 ## levels.txt
 
-Used to describe the vertical levels within a station. `level_id`s can be applied to stops in [stops.txt](#stopstxt). [Learn more about the recent introduction of levels to GTFS.](https://github.com/google/transit/pull/143)
+Used to describe the vertical levels within a station. `level_id`s can be applied to stops in [stops.txt](#stopstxt). [Learn more about levels in GTFS.](https://github.com/google/transit/pull/143)
 
 Field Name | GTFS spec | Status | Notes
 ---------- | -------- | ------ | --------
@@ -294,7 +294,7 @@ trip_id | Experimental | Included | The `trip_id` of the trip which has the addi
 
 ## pathways.txt
 
-Describes the various pedestrian paths of travel within and around a station. [Learn more about the recent introduction of pathways to GTFS.](https://github.com/google/transit/pull/143)
+Describes the various pedestrian paths of travel within and around a station. [Learn more about pathways in GTFS.](https://github.com/google/transit/pull/143)
 
 At this time, the MBTA implementation of pathways does not include all stations, with additional stations being added to the file continually.
 
