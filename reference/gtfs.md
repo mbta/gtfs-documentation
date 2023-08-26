@@ -29,9 +29,9 @@ Table Name | GTFS spec | Status | Notes
 [agency.txt](#agencytxt) | Required | Included |
 [areas.txt](#areastxt) | Optional | Included | Provides labels for groupings of locations further defined in [stop_areas.txt](#stop_areastxt).
 [attributions.txt](#attributionstxt) | Optional | N/A |
-[calendar.txt](#calendartxt) | Required | Included | Generated programatically. May not be easy for humans to read.
+[calendar.txt](#calendartxt) | Required | Included | Generated programatically. May not be easy for humans to read. May include `service_id`s used exclusively in [timeframes.txt](#timeframestxt), rather than [trips.txt](#tripstxt).
 [calendar_attributes.txt](#calendar_attributestxt) | Experimental | Included | Adds human-readable names and further context to calendar `service_id`s.
-[calendar_dates.txt](#calendar_datestxt) | Optional | Included | Generated programatically. May not be easy for humans to read.
+[calendar_dates.txt](#calendar_datestxt) | Optional | Included | Generated programatically. May not be easy for humans to read. May include `service_id`s used exclusively in [timeframes.txt](#timeframestxt), rather than [trips.txt](#tripstxt).
 [checkpoints.txt](#checkpointstxt) | Experimental | Included | Similar in part to [stops.txt](#stopstxt), this table provides human-readable names to checkpoints from [stop_times.txt](#stop_timestxt).
 [directions.txt](#directionstxt) | Experimental | Included | Provides for passenger-facing names to be documented for `direction_id` on a route-by-route basis.
 [facilities.txt](#facilitiestxt) | Experimental | Included | Amenities such as elevators, escalators, parking lots, and bike storage. Typically located within stations.
@@ -56,6 +56,7 @@ Table Name | GTFS spec | Status | Notes
 [stops.txt](#stopstxt) | Required | Included |
 [stop_areas.txt](#stop_areastxt) | Optional | Included | Assigns selected stops to area groupings for the purpose of calculating fares.
 [stop_times.txt](#stop_timestxt) | Required | Included |
+[timeframes.txt](#timeframestxt) | Optional | Included | Date and time periods to use in fare rules for fares that vary based on date and time factors. [Learn more abbout the recent introduction of timeframes to GTFS.](https://github.com/google/transit/pull/357)
 [transfers.txt](#transferstxt) | Optional | Included |
 [translations.txt](#translationstxt) | Optional | N/A |
 [trips.txt](#tripstxt) | Required | Included |
@@ -86,6 +87,8 @@ area_name | Optional | Included |
 
 ## calendar.txt
 
+Services defined in this file may be referenced in either [trips.txt](#tripstxt) or [timeframes.txt](#timeframestxt).
+
 Field Name | GTFS spec | Status | Notes
 ---------- | -------- | ------ | ------- 
 service_id | Required | Included | 
@@ -115,6 +118,8 @@ rating_end_date | Experimental | Included (some records) | End date of the sched
 rating_description | Experimental | Included | Human-readable name of this schedule rating. Typically will be "Winter", "Spring", "Summer", or "Fall".
 
 ## calendar_dates.txt
+
+Services defined in this file may be referenced in either [trips.txt](#tripstxt) or [timeframes.txt](#timeframestxt).
 
 Field Name | GTFS spec | Status | Notes
 ---------- | -------- | ------ | --------
@@ -188,6 +193,8 @@ network_id | Optional | Included |
 from_area_id | Optional | Included |
 to_area_id | Optional | Included |
 fare_product_id | Required | Included |
+from_timeframe_group_id | Optional | Included (some records) |
+to_timeframe_group_id | Optional | Included (some records) |
 transfer_only | Experimental | Included | This is a [proposed Transit extension](https://docs.google.com/document/d/18yWhwR89pQp48VuBNPXK0djLXOtdjWhgC2h6jCC8WPM/edit?usp=sharing) to designate fare rules that may only be considered as as part of a transfer. Consumers of the MBTA's fares data are strongly encouraged to integrate this field to ensure accurate rapid transit fares are calculated. Valid values:<ul><li>`0` (or empty): This rule may be considered regardless of whether any transfer rules apply</li><li>`1`: This rule may only be considered if there is a matching fare transfer rule from the preceding leg to the current leg; a rule with this value can never match the first leg of a journey
 </li></ul>
 
@@ -415,6 +422,17 @@ timepoint| Optional | Included | On Commuter Rail, stops that are not timepoints
 checkpoint_id | Experimental | Included (some records) | Identifier for locations at which on-time performance is measured. This includes all MBTA subway stops and major bus stops. Primarily for internal use. Refer also to [checkpoints.txt](#checkpointstxt). A `checkpoint_id` corresponds to a general geographic location (such as a public square or rail station) and can be shared by several routes at different `stop_id`s in close proximity.
 continuous_pickup | Optional | Included (some records) | A value of 0 indicates that continuous pickup is offered between this `stop_time` and the next `stop_time` on the trip. An empty value indicates no continuous pickup is offered.
 continuous_drop_off | Optional | Included (some records) | A value of 0 indicates that continuous drop off is offered between this `stop_time` and the next `stop_time` on the trip. An empty value indicates no continuous drop off is offered.
+
+## timeframes.txt
+
+Recently [introduced to GTFS](https://github.com/google/transit/pull/357), used to describe fares that can vary based on the time of day, the day of the week, or a particular day in the year. Timeframes can be associated with fare products in [fare_leg_rules.txt](#fare_leg_rulestxt).
+
+Field Name | GTFS spec | Status | Notes
+---------- | -------- | ------ | ----------
+timeframe_group_id | Required | Included | 
+start_time | Optional (some records) | Included | 
+end_time | Optional (some records) | Included | 
+service_id | Required | Included | 
 
 ## transfers.txt
 
