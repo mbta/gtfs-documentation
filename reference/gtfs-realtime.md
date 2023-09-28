@@ -123,7 +123,7 @@ Crowding estimates for each car are calculated based on live weight information 
 
 Crowding data is provided within the `multi_carriage_details` element in the `VehiclePosition` message.
 
-Each multi_carriage_details entry includes the following fields:
+Each `multi_carriage_details` element contains a [`CarriageDetails`](https://gtfs.org/realtime/reference/#message-CarriageDetails) message :
 
 | Field                | Type    | Description                             |
 | -------------------- | ------- | --------------------------------------- |
