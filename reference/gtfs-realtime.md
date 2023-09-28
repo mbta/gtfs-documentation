@@ -121,7 +121,7 @@ Orange Line crowding information is available on a per-car basis. Note: new Red 
 
 Crowding estimates for each car are calculated based on live weight information reported by the Orange Line cars every several seconds. Due to the frequency of the weight updates reported by each car, several seconds of data lag is to be expected.
 
-Crowding data is provided as part of the VehiclePosition feed within the multi_carriage_details element, nested within the Vehicle element.
+Crowding data is provided within the `multi_carriage_details` element in the `VehiclePosition` message.
 
 Each multi_carriage_details entry includes the following fields:
 
