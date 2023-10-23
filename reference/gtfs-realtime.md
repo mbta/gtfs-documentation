@@ -111,6 +111,27 @@ Field | Type | Cardinality | Required | Description
 ----- | ---- | ----------- | -------- | -----------
 `label` | string | One | Required | The rider-visible label of the car.
 
+## Occupancy data 
+
+Real-time crowding information is available for bus, Orange Line, and some Red Line cars. For details, see the [MBTA’s Crowding Information page][crowding].
+
+### Subway 
+
+Orange Line crowding information is available on a per-car basis. Note: new Red Line train cars (19xx series as per the VehicleDescriptor label) also support car-level crowding information.
+
+Crowding estimates for each car are calculated based on live weight information reported by the Orange Line cars every several seconds. Due to the frequency of the weight updates reported by each car, several seconds of data lag is to be expected.
+
+Crowding data is provided within the `multi_carriage_details` element in the `VehiclePosition` message.
+
+Each `multi_carriage_details` element contains a [`CarriageDetails`](https://gtfs.org/realtime/reference/#message-CarriageDetails) message :
+
+| Field                | Type    | Description                             |
+| -------------------- | ------- | --------------------------------------- |
+| carriage_sequence    | int32   | The order of a carriage within a train  |
+| id                   | string  | Not used by the MBTA; expect null.      |
+| label                | string  | Individual car ID                       |
+| occupancy_percentage | int32   | Individual car percentage occupancy     |
+| occupancy_status     | int32   | Individual car occupancy status         |
 
 [rt-docs]: https://github.com/google/transit/tree/master/gtfs
 [crowding]: https://www.mbta.com/projects/crowding-information-riders
