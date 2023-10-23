@@ -11,6 +11,9 @@ The MBTA provides GTFS Realtime feeds in several formats:
 - [Standard](#standard-feeds)
 - [JSON](#json-feeds)
 - [Enhanced JSON](#enhanced-json-feeds)
+- [Standard](#standard-feeds)
+- [JSON](#json-feeds)
+- [Enhanced JSON](#enhanced-json-feeds)
 
 ## Standard feeds
 
@@ -36,6 +39,26 @@ The following experimental fields are provided:
 
 Occupancy data is only available for certain routes and vehicles. For details,
 see the MBTA's [Crowding Information][crowding] page.
+
+### Uncertainly values
+
+Our [`StopTimeEvent`][mste] messages _may_ have an `uncertainty` value associated
+with them. When present their meanings are as follows.
+
+For Bus trips:
+`uncertainty` | Meaning
+------------- | ------
+\< 300 | Valid real-time prediction
+300 | Real-time prediction not available. This code is primarily used when a vehicle has not yet been assigned to the trip, (i.e. because the block has not started yet). It is a schedule-based prediction, but Swiftly adjusts the schedule-based prediction time using observed historical travel times to make predictions more accurate than the schedule.
+301 | Valid real-time prediction, though the bus appears to be stalled or significantly delayed and predictions are not as accurate
+\> 301 | Likely invalid prediction, recommend not showing anything (and not showing scheduled time), very rare situation.
+
+For Rail trips:
+`uncertainty` | Meaning
+------------- | ------
+60 | The trip has already started
+120 | A terminal/reverse trip departure for a trip that has NOT started and a train is awaiting departure at the origin
+360 | A terminal/reverse trip for a trip that has NOT started and a train is completing a previous trip
 
 ## JSON feeds
 
@@ -154,3 +177,4 @@ these trips may appear as revenue trips in the feeds.
 [mvp]: https://github.com/google/transit/blob/master/gtfs-realtime/spec/en/reference.md#message-vehicleposition
 [mos]: https://github.com/google/transit/blob/master/gtfs-realtime/spec/en/reference.md#enum-occupancystatus
 [msr]: https://github.com/google/transit/blob/master/gtfs-realtime/spec/en/reference.md#enum-schedulerelationship
+[mste]: https://github.com/google/transit/blob/master/gtfs-realtime/spec/en/reference.md#message-stoptimeevent
