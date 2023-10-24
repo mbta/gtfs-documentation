@@ -131,7 +131,7 @@ Each `multi_carriage_details` element contains a [`CarriageDetails`](https://gtf
 | id                   | string  | Not used by the MBTA; expect null.      |
 | label                | string  | Individual car ID                       |
 | occupancy_percentage | int32   | Individual car percentage occupancy     |
-| occupancy_status     | int32   | Individual car occupancy status         |
+| occupancy_status     | [`OccupancyStatus`][mos] | Individual car occupancy status         |
 
 [rt-docs]: https://github.com/google/transit/tree/master/gtfs
 [crowding]: https://www.mbta.com/projects/crowding-information-riders
@@ -141,3 +141,4 @@ Each `multi_carriage_details` element contains a [`CarriageDetails`](https://gtf
 [mtd]: https://github.com/google/transit/blob/master/gtfs-realtime/spec/en/reference.md#message-tripdescriptor
 [mvd]: https://github.com/google/transit/blob/master/gtfs-realtime/spec/en/reference.md#message-vehicledescriptor
 [mvp]: https://github.com/google/transit/blob/master/gtfs-realtime/spec/en/reference.md#message-vehicleposition
+[mos]: https://github.com/google/transit/blob/master/gtfs-realtime/spec/en/reference.md#enum-occupancystatus
