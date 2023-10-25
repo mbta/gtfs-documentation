@@ -49,7 +49,7 @@ For Bus trips:
 `uncertainty` | Meaning
 ------------- | ------
 \< 300 | Valid real-time prediction
-300 | Real-time prediction not available. This code is primarily used when a vehicle has not yet been assigned to the trip, (i.e. because the block has not started yet). It is a schedule-based prediction, but Swiftly adjusts the schedule-based prediction time using observed historical travel times to make predictions more accurate than the schedule.
+300 | Real-time prediction not available. This code is primarily used when a vehicle has not yet been assigned to the trip, (i.e. because the block has not started yet). It is a schedule-based prediction, but we adjust the schedule-based prediction time using observed historical travel times to make predictions more accurate than the schedule.
 301 | Valid real-time prediction, though the bus appears to be stalled or significantly delayed and predictions are not as accurate
 \> 301 | Likely invalid prediction, recommend not showing anything (and not showing scheduled time), very rare situation.
 
@@ -155,17 +155,16 @@ Each `multi_carriage_details` element contains a [`CarriageDetails`](https://gtf
 
 ### Non-Revenue trips
 
-Non-revenue vehicle movements, such as travelling to the start of a trip, or movements
-within the yard may be exposed in the enchanced feed as non-revenue trips. In general,
-these trips should not be shown to riders as they do not accept passengers. These trips
-can be identified by the lack of a `trip_id` within the [`TripDescriptor`][mtd] message
-combined with all [`StopTimeUpdate`][mstu] messages having a [`ScheduleRelationship`][msr]
-of skipped.
+Non-revenue vehicle movements, such as traveling to the start point of a trip or movements within a yard,
+may be exposed in the enchanced feed as non-revenue trips. In general, these trips should not be shown
+to riders as they do not accept passengers. These trips can be identified by the lack of a `trip_id`
+within the [`TripDescriptor`][mtd] message combined with all [`StopTimeUpdate`][mstu] messages having
+a [`ScheduleRelationship`][msr] of skipped.
 
-Non-revenue trips will only appear in the enhanced feed.
+Non-revenue trips only appear in the enhanced feed.
 
-At this time we are working to identify non-revenue light rail trips. In the meantime
-these trips may appear as revenue trips in the feeds.
+At this time, we are continuing to work on identifying non-revenue light rail trips
+(Green Line, Mattapan Trolley). In the meantime, these trips may appear as revenue trips in the feeds.
 
 [rt-docs]: https://github.com/google/transit/tree/master/gtfs
 [crowding]: https://www.mbta.com/projects/crowding-information-riders
