@@ -40,7 +40,7 @@ The following experimental fields are provided:
 Occupancy data is only available for certain routes and vehicles. For details,
 see the MBTA's [Crowding Information][crowding] page.
 
-### Uncertainly values
+### Uncertainty values
 
 Our [`StopTimeEvent`][mste] messages _may_ have an `uncertainty` value associated
 with them. When present their meanings are as follows.
