@@ -154,9 +154,9 @@ Each `multi_carriage_details` element contains a [`CarriageDetails`](https://gtf
 
 Non-revenue vehicle movements, such as traveling to the start point of a trip or movements within a yard,
 may be exposed in the enhanced feed as non-revenue trips. In general, these trips should not be shown
-to riders as they do not accept passengers. These trips can be identified `trip_id` within the
-[`TripDescriptor`][mtd] message that starts with `NONREV` combined with all
-[`StopTimeUpdate`][mstu] messages having a [`ScheduleRelationship`][msr] of skipped.
+to riders as they do not accept passengers. These trips will have a `revenue` field in their [TripDescriptor][mtd]
+message with a value of `false`. When the `revenue` field is not present, the trip should be considered revenue
+generating.
 
 Non-revenue trips only appear in the enhanced feed.
 
