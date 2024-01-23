@@ -56,7 +56,7 @@ Table Name | GTFS spec | Status | Notes
 [stops.txt](#stopstxt) | Required | Included |
 [stop_areas.txt](#stop_areastxt) | Optional | Included | Assigns selected stops to area groupings for the purpose of calculating fares.
 [stop_times.txt](#stop_timestxt) | Required | Included |
-[timeframes.txt](#timeframestxt) | Optional | Coming soon | Date and time periods to use in fare rules for fares that vary based on date and time factors. [Learn more abbout the recent introduction of timeframes to GTFS.](https://github.com/google/transit/pull/357) As of August 31, 2023, we are temporarily removing this file until there is further industry support; we anticipate restoring this file in the near future.
+[timeframes.txt](#timeframestxt) | Optional | Included | Date and time periods to use in fare rules for fares that vary based on date and time factors. [Learn more abbout the recent introduction of timeframes to GTFS.](https://github.com/google/transit/pull/357)
 [transfers.txt](#transferstxt) | Optional | Included |
 [translations.txt](#translationstxt) | Optional | N/A |
 [trips.txt](#tripstxt) | Required | Included |
@@ -426,8 +426,6 @@ continuous_drop_off | Optional | Included (some records) | A value of 0 indicate
 ## timeframes.txt
 
 Recently [introduced to GTFS](https://github.com/google/transit/pull/357), used to describe fares that can vary based on the time of day, the day of the week, or a particular day in the year. Timeframes can be associated with fare products in [fare_leg_rules.txt](#fare_leg_rulestxt).
-
-As of August 31, 2023, we are temporarily removing this file from GTFS until there is improved industry support; we anticipate restoring this file in the near future.
 
 Field Name | GTFS spec | Status | Notes
 ---------- | -------- | ------ | ----------
