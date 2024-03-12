@@ -95,7 +95,6 @@ fields that are not part of the GTFS Realtime specification.
 | [`EntitySelector`][mes]    | `activities`       | [Activity](#enum-activity)  | Many        | Required | Describes the activities impacted by an alert with regard to the selected entity.                                                                                                     |
 | [`StopTimeUpdate`][mstu]   | `boarding_status`  | string                      | One         | Optional | Describes the boarding status of the stop time as a short English-language string, for example _"On time"_, _"Now boarding"_, or _"Departed"_. Only provided for Commuter Rail trips. |
 | [`TripDescriptor`][mtd]    | `route_pattern_id` | string                      | One         | Optional | Indicates the route pattern the described trip belongs to (from [route_patterns.txt](gtfs.md#route_patternstxt) in GTFS).                                                             |
-| [`VehicleDescriptor`][mvd] | `consist`          | [Consist](#message-consist) | Many        | Optional | Information about the individual rail cars that make up the vehicle. Only provided for subway and light rail vehicles.                                                                |
 
 The enhanced feeds may include fields other than those listed here. Such fields
 should be treated as **experimental**, subject to change or removal at any time
@@ -119,14 +118,6 @@ the selected entity, their overall trip would be impacted.
 | `BRINGING_BIKE`    | Bringing a bicycle while boarding or exiting.      |
 | `STORE_BIKE`       | Storing a bicycle at a station.                    |
 | `PARK_CAR`         | Parking a car at a garage or lot in a station.     |
-
-### message `Consist`
-
-An individual rail car within a vehicle that consists of multiple cars.
-
-| Field   | Type   | Cardinality | Required | Description                         |
-| ------- | ------ | ----------- | -------- | ----------------------------------- |
-| `label` | string | One         | Required | The rider-visible label of the car. |
 
 ## Occupancy data 
 
