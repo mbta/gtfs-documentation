@@ -9,8 +9,8 @@ The MBTA GTFS feed is available from the following URL: [https://cdn.mbta.com/MB
 #### About the fields in this document
 
 * **Status** field
-	* **Included** 
-	* **Included (some records)** 
+	* **Included**
+	* **Included (some records)**
 	* **Included (empty)**: Included, but not populated
 	* **N/A**: Part of GTFS specifications, but not included in MBTA GTFS
 	* **Coming soon**: Will be included in upcoming GTFS version
@@ -18,7 +18,7 @@ The MBTA GTFS feed is available from the following URL: [https://cdn.mbta.com/MB
 	* **Persistent**: Value for record will not change between one **feed_version** and the next
 
 * **GTFS spec** field
-	* **Required** 
+	* **Required**
 	* **Optional**
 	* **Experimental**: Not part of GTFS specifications, but included in MBTA GTFS
 
@@ -44,7 +44,7 @@ Table Name | GTFS spec | Status | Notes
 [fare_rules.txt](#fare_rulestxt) | Optional | N/A |
 [fare_transfer_rules.txt](#fare_transfer_rulestxt) | Optional | Included | Rules for calculating fares for transfers between legs of travel.
 [feed_info.txt](#feed_infotxt) | Optional | Included |
-[frequencies.txt](#frequenciestxt) | Optional | N/A | 
+[frequencies.txt](#frequenciestxt) | Optional | N/A |
 [levels.txt](#levelstxt) | Optional | Included | Provides relative elevation information for `stop_id`s (including boarding platforms, station entrances, and generic nodes) within a parent station.
 [lines.txt](#linestxt) | Experimental | Included | Groups similar routes (such as those which serve the same trunk corridor or bus terminal) for the purpose of customer display.
 [linked_datasets.txt](#linked_datasetstxt) | Experimental | Included | URLs to linked GTFS-realtime datasets: Trip Updates, Vehicle Positions and Service Alerts.
@@ -71,12 +71,12 @@ Field Name | GTFS spec| Status | Notes
 ---------- | -------- | ------ | -------
 agency_id | Optional | Included | MBTA `agency_id` = `1`.
 agency_name | Required | Included |
-agency_url | Required | Included | 
-agency_timezone | Required | Included | 
-agency_lang | Optional | Included | 
-agency_phone | Optional | Included | 
-agency_fare_url | Optional | N/A | 
-agency_email | Optional | N/A | 
+agency_url | Required | Included |
+agency_timezone | Required | Included |
+agency_lang | Optional | Included |
+agency_phone | Optional | Included |
+agency_fare_url | Optional | N/A |
+agency_email | Optional | N/A |
 
 ## areas.txt
 
@@ -90,16 +90,16 @@ area_name | Optional | Included |
 Services defined in this file may be referenced in either [trips.txt](#tripstxt) or [timeframes.txt](#timeframestxt).
 
 Field Name | GTFS spec | Status | Notes
----------- | -------- | ------ | ------- 
-service_id | Required | Included | 
-monday | Required | Included | 
-tuesday | Required | Included | 
-wednesday | Required | Included | 
-thursday | Required | Included | 
-friday | Required | Included | 
-saturday | Required | Included | 
-sunday | Required | Included | 
-start_date | Required | Included | 
+---------- | -------- | ------ | -------
+service_id | Required | Included |
+monday | Required | Included |
+tuesday | Required | Included |
+wednesday | Required | Included |
+thursday | Required | Included |
+friday | Required | Included |
+saturday | Required | Included |
+sunday | Required | Included |
+start_date | Required | Included |
 end_date | Required | Included |
 
 ## calendar_attributes.txt
@@ -123,9 +123,9 @@ Services defined in this file may be referenced in either [trips.txt](#tripstxt)
 
 Field Name | GTFS spec | Status | Notes
 ---------- | -------- | ------ | --------
-service_id | Required | Included |  
-date | Required | Included | 
-exception_type | Required | Included | 
+service_id | Required | Included |
+date | Required | Included |
+exception_type | Required | Included |
 holiday_name | Experimental | Included (some records) | Names a particular holiday for which the service exception is in effect (e.g. "Thanksgiving Day").
 
 ## checkpoints.txt
@@ -159,9 +159,9 @@ facility_type | Experimental | Included | Specifies the direct type of a facilit
 stop_id | Experimental | Included (some records) | Specifies one `stop_id` with which the facility is associated. Common field with [stops.txt](#stopstxt). If a facility is associated with more than one `stop_id` within a parent station, the `stop_id` of the parent station should fill this field. In this case, if the facility does not serve every child stop within the parent stop, each excluded child stop served must be specified as a separate entry in [facilities_properties.txt](#facilities_propertiestxt) with the property `excludes-stop`.
 facility_short_name | Experimental | Included (some records) | Contains a short name of the facility. Note that this name might not include the station name or the type of facility. At least one of `facility_short_name` or `facility_long_name` must be specified, or potentially both if appropriate.
 facility_long_name | Experimental | Included (some records) | Contains a descriptive name of the facility which can be used without additional context concerning the station or type of facility. At least one of `facility_short_name` or `facility_long_name` must be specified, or potentially both if appropriate.
-facility_desc | Experimental | Included (some records) | 
-facility_lat | Experimental | Included (some records) | 
-facility_lon | Experimental | Included (some records) | 
+facility_desc | Experimental | Included (some records) |
+facility_lat | Experimental | Included (some records) |
+facility_lon | Experimental | Included (some records) |
 wheelchair_facility | Experimental | Included | Identifies whether a facility is accessible to customers using a wheelchair. The field can have the following values:<ul><li>`0` (or empty): indicates that there is no accessibility information for the facility</li><li>`1`: indicates that the facility is wheelchair accessible</li><li>`2`: facility not accessible to persons in wheelchairs</li></ul>
 
 ## facilities_properties.txt
@@ -204,8 +204,8 @@ Details the physical and virtual fare media that can be used for the fares descr
 
 Field Name | GTFS spec | Status | Notes
 ---------- | -------- | ------ | --------
-fare_media_id | Required | Included | 
-fare_media_name | Optional | Included | 
+fare_media_id | Required | Included |
+fare_media_name | Optional | Included |
 fare_media_type | Required | Included | A `1` value represents a physical, paper ticket that allows a passenger to take either a certain number of pre-purchased trips or unlimited trips within a fixed period of time.
 
 ## fare_products.txt
@@ -214,11 +214,11 @@ Promotional fares and unlimited passes may be introduced to this file at a later
 
 Field Name | GTFS spec | Status | Notes
 ---------- | -------- | ------ | --------
-fare_product_id | Required | Included | 
-fare_product_name | Optional | Included | 
-fare_media_id | Optional | Included | 
-amount | Required | Included | 
-currency | Required | Included | 
+fare_product_id | Required | Included |
+fare_product_name | Optional | Included |
+fare_media_id | Optional | Included |
+amount | Required | Included |
+currency | Required | Included |
 
 ## fare_transfer_rules.txt
 
@@ -228,24 +228,24 @@ More complete information about the MBTA's allowed transfers, including those no
 
 Field Name | GTFS spec | Status | Notes
 ---------- | -------- | ------ | --------
-from_leg_group_id | Optional | Included | 
-to_leg_group_id | Optional | Included | 
-transfer_count | Required | Included | 
-duration_limit | Optional | Included | 
-duration_limit_type | Required | Included | 
-fare_transfer_type | Required | Included | 
-fare_product_id | Optional | Included | 
+from_leg_group_id | Optional | Included |
+to_leg_group_id | Optional | Included |
+transfer_count | Required | Included |
+duration_limit | Optional | Included |
+duration_limit_type | Required | Included |
+fare_transfer_type | Required | Included |
+fare_product_id | Optional | Included |
 
 ## feed_info.txt
 
 Field Name | GTFS spec | Status | Notes
 ---------- | -------- | ------ | ------
-feed_publisher_name | Required | Included | 
-feed_publisher_url | Required | Included | 
-feed_lang | Required | Included | 
+feed_publisher_name | Required | Included |
+feed_publisher_url | Required | Included |
+feed_lang | Required | Included |
 feed_start_date | Optional | Included | When comparing two GTFS feeds, the newer one will always have a newer `feed_start_date`.
 feed_end_date | Optional | Included |
-feed_version | Optional | Included | 
+feed_version | Optional | Included |
 feed_contact_email | Optional | Included | An email address for communication regarding the GTFS dataset and data publishing practices. It is a technical contact for GTFS-consuming applications. Provide customer service contact information through [agency.txt](agencytxt).
 feed_id | Experimental | Included | The universally unique identifier for the GTFS feed.
 
@@ -292,11 +292,11 @@ Some transit trips serve more than one route. For example, Commuter Rail trips t
 
 This experimental file indicates routes that a trip is associated with, in addition to the `route_id` identified with this trip in [trips.txt](#tripstxt). If showing a schedule of all service on a route, that display should include trips associated with the route in [multi_route_trips.txt](#multi_route_tripstxt). If showing general information about a trip in a different context, the `route_id` identified with the in [trips.txt](#tripstxt) is still the best route to label the trip with.
 
-If a every trip of a `route_id` appears here, that route does not have any trips of "its own" and should probably not be shown to customers in lists of routes. Examples include Route 62/76, which to a customer is an indication of Route 62 service and Route 76 service, not its own route.
+If a every trip of a `route_id` appears here, that route does not have any trips of "its own" and should probably not be shown to customers in lists of routes.
 
 Field Name | GTFS spec | Status | Notes
 ---------- | ------- | ------- | --------
-added_route_id | Experimental | Included | An additional `route_id` associated with the given `trip_id`. Can appear repeatedly if more than one trip is added to it. 
+added_route_id | Experimental | Included | An additional `route_id` associated with the given `trip_id`. Can appear repeatedly if more than one trip is added to it.
 trip_id | Experimental | Included | The `trip_id` of the trip which has the additional route associated with it. Can appear repeatedly if it is being added to more than one route.
 
 ## pathways.txt
@@ -329,15 +329,15 @@ instructions | Experimental | Included (empty) |
 Field Name | GTFS spec | Status |  Notes
 ---------- | ------- | ------- | --------
 route_id | Required | Included (persistent) |
-agency_id | Optional | Included (persistent) | 
+agency_id | Optional | Included (persistent) |
 route_short_name | Required | Included (some records) | Populated for service with branches on separate route IDs (such as Green Line or Silver Line) and all MBTA bus services.<br><br>If `route_short_name` is populated for a route, regardless of the presence of `route_long_name`, then "Route `route_short_name`" is an appropriate way to describe the route.
 route_long_name | Required | Included (some records) | Populated for all modes. For rapid transit services with branches (Green Line), both `route_long_name` and `route_short_name` are populated: `route_short_name` containts the branch designation only, and `route_long_name` identifies both the route and the branch.<br><br>For rail-based and ferry services, `route_long_name` identifies a lengthier, commonly-used route identifier, such as "Red Line" or "Providence/Stoughton Line".<br>For bus services only, `route_long_name` provides the typical end points for the route, and should **not** be used as a standalone route identifier.
 route_desc | Optional | Included | Categorizes a route's level of service. For example, identifies whether bus service runs frequently all day, is aimed at weekday commuters, or supplements service on other routes.<br><br>**Possible Values:**<ul><li>`Commuter Rail`</li><li>`Rapid Transit`</li><li>`Local Bus`</li><li>`Key Bus`</li><li>`Supplemental Bus`</li><li>`Community Bus`</li><li>`Commuter Bus`</li><li>`Ferry`</li><li>`Rail Replacement Bus`</li></ul>
 route_fare_class | Experimental | Included | Specifies the fare type of the route, which can differ from the service category. This proposal uses this field instead of using [fare_rules.txt](#fare_rulestxt) and [fare_attributes.txt](#fare_attributestxt) as those files currently do not support the entirety of the MBTA's fare and transfer policies For public-facing applications, we recommend that use and display of route_fare_class be equally or more prominent than `route_desc`, as passengers often identify routes by their fares.<br><br>**Possible values for the MBTA implementation:**<ul><li>`Local Bus`</li><li>`Inner Express`</li><li>`Outer Express`</li><li>`Rapid Transit`</li><li>`Commuter Rail`</li><li>`Ferry`</li><li>`Free`</li><li>`Special`</li></ul>
-route_type | Required | Included | Indicates the type of vehicle that operates the route. It is not recommended to use this field's values to categorize MBTA service. 
-route_url | Optional | Included (some records) | 
-route_color | Optional | Included (some records) | 
-route_text_color | Optional | Included (some records) | 
+route_type | Required | Included | Indicates the type of vehicle that operates the route. It is not recommended to use this field's values to categorize MBTA service.
+route_url | Optional | Included (some records) |
+route_color | Optional | Included (some records) |
+route_text_color | Optional | Included (some records) |
 route_sort_order | Optional | Included | Integer value that can be used for ordering routes in a way that is ideal for presentation to customers.
 line_id | Experimental | Included (some records) | References `line_id` values from [lines.txt](#linestxt). Indicates in which grouping of routes this route belongs, if any. For example, `route_id` `62` may have a `line_id` value of `line-6276`. Note that groupings are subject to change without notice.
 listed_route | Experimental | Included (some records) | Indicates whether route should be included in a public-facing list of all routes. This is useful for determining which routes which should not be shown by themselves, but rather part of another route. Most uses of this field should incorporate data from [multi_route_trips.txt](#multi_route_tripstxt). The following values are valid:<ul><li>`0` (or empty): Route should be included in a list of routes.</li><li>`1`: Route should not be included in a public-facing list of routes.</li></ul>For example, in the future, service for route "450W" trips may appear under a `route_id` of `450W`, but with a `listed_route` value of `1`, and all of the route's trips included in [multi_route_trips.txt](#multi_route_tripstxt) to be displayed together with `route_id` `450`.
@@ -365,10 +365,10 @@ canonical_route_pattern | Experimental | Included | Indicates whether or not a p
 
 Field Name | GTFS spec | Status |  Notes
 ---------- | -------- | ------ | -------
-shape_id | Required | Included | 
-shape_pt_lat | Required | Included | 
-shape_pt_lon | Required | Included | 
-shape_pt_sequence | Required | Included | 
+shape_id | Required | Included |
+shape_pt_lat | Required | Included |
+shape_pt_lon | Required | Included |
+shape_pt_sequence | Required | Included |
 shape_dist_traveled | Optional | Included | Distances reported in meters.
 
 ## stops.txt
@@ -389,7 +389,7 @@ stop_url | Optional | Included (some records) | Populated for stops which are pa
 level_id | Experimental | Included (some records) | Reference to vertical station level from [levels.txt](#levelstxt).
 location_type | Optional | Included | A value of `1` indicates a parent station complex, whereas `2` designates a station entrance/exit, `0` indicates a distinct boarding location, and `3` indicates a generic node within a station, such as the end of a staircase, elevator, or escalator.
 parent_station | Optional | Included (some records) | For stops location within stations, the `parent_station`'s `stop_id` represents the whole facility and the child stop represents a specific boarding area, entrance, or generic node.<br><br>All subway, Commuter Rail, and CapeFLYER stops have a parent station, as do some bus and Silver Line facilities, such as Dudley.
-stop_timezone | Optional | N/A | 
+stop_timezone | Optional | N/A |
 wheelchair_boarding | Optional | Included | Additional guidance for bus stops only:<ul><li>`0`: Minor to moderate accessibility barriers exist at the stop. Bus operator may need to relocate bus for safe boarding and exiting.</li><li>`2`: Significant accessibility barriers exist at the stop. Customers using wheeled mobility devices may need to board at street level.</li></ul>
 municipality | Experimental | Included (some records) | Lists the name of the city or town in which the stop is located.
 on_street | Experimental | Included (some records) | Provides the full name of the street along which a stop is located. Newer or recently renamed or relocated streets may not properly appear in `on_street`. Populated for most, but not all, bus stops. Not currently populated for rail or ferry stops, nor for stops with `location_type` not equal to `0`.
@@ -409,15 +409,15 @@ stop_id | Required | Included |
 
 Field Name | GTFS spec | Status | Notes
 ---------- | -------- | ------ | --------
-trip_id | Required | Included |  
-arrival_time | Required | Included | 
-departure_time | Required | Included | 
-stop_id | Required | Included (persistent) | 
-stop_sequence | Required | Included | 
+trip_id | Required | Included |
+arrival_time | Required | Included |
+departure_time | Required | Included |
+stop_id | Required | Included (persistent) |
+stop_sequence | Required | Included |
 stop_headsign | Optional | Included (some records) | Currently only used on commuter rail.
 pickup_type | Optional | Included | On commuter rail, a `pickup_type` of 3 represents a commuter rail "flag" stop marked with "F" on the schedule. Customer must visible to the approaching train to board.<br><br>On certain bus routes, a `pickup_type` of 3 represents continuous pickup: The bus will stop at any safe location between GTFS stops to pick up passengers. Customer must wave at the driver to board.
 drop_off_type | Optional | Included | On commuter rail, a `drop_off_type` of 3 represents a commuter rail "flag" stop marked with "F" on the schedule. Customer must notify the conductor to exit.<br><br>On certain bus routes, a `drop_off_type` of 3 represents continuous drop off: The bus will stop at any safe location between GTFS stops to drop off passengers. Customer must notify the driver to exit.
-shape_dist_traveled | Optional | N/A | 
+shape_dist_traveled | Optional | N/A |
 timepoint| Optional | Included | On Commuter Rail, stops that are not timepoints and are not the last stop are labeled "L" on printed schedules to indicate that the train may leave early. MBTA bus and subway operations do not have many scheduled hold points so very few of their stop times have a `timepoint` value of 1.
 checkpoint_id | Experimental | Included (some records) | Identifier for locations at which on-time performance is measured. This includes all MBTA subway stops and major bus stops. Primarily for internal use. Refer also to [checkpoints.txt](#checkpointstxt). A `checkpoint_id` corresponds to a general geographic location (such as a public square or rail station) and can be shared by several routes at different `stop_id`s in close proximity.
 continuous_pickup | Optional | Included (some records) | A value of 0 indicates that continuous pickup is offered between this `stop_time` and the next `stop_time` on the trip. An empty value indicates no continuous pickup is offered.
@@ -429,17 +429,17 @@ Recently [introduced to GTFS](https://github.com/google/transit/pull/357), used 
 
 Field Name | GTFS spec | Status | Notes
 ---------- | -------- | ------ | ----------
-timeframe_group_id | Required | Included | 
-start_time | Optional (some records) | Included | 
-end_time | Optional (some records) | Included | 
-service_id | Required | Included | 
+timeframe_group_id | Required | Included |
+start_time | Optional (some records) | Included |
+end_time | Optional (some records) | Included |
+service_id | Required | Included |
 
 ## transfers.txt
 
 Field Name | GTFS spec | Status | Notes
 ---------- | -------- | ------ | ----------
-from_stop_id | Required | Included | 
-to_stop_id | Required | Included | 
+from_stop_id | Required | Included |
+to_stop_id | Required | Included |
 transfer_type | Required | Included | Includes usage of the [relatively new `4` value](https://github.com/google/transit/blob/master/gtfs/spec/en/reference.md#linked-trips) to link trips between which riders are allowed to remain aboard.
 min_transfer_time | Optional | Included (some records) | As specified in the GTFS standard, this field is the sum of `min_walk_time` and `suggested_buffer_time`.
 min_walk_time | Experimental | Included (some records) | Minimum time required to travel by foot from `from_stop_id` to `to_stop_id`.
@@ -453,8 +453,8 @@ to_trip_id | Optional | Included (some records) | If present, specifies that the
 
 Field Name | GTFS spec | Status | Notes
 ---------- | ------- | ------- | --------
-route_id | Required | Included (persistent)| 
-service_id | Required | Included | 
+route_id | Required | Included (persistent)|
+service_id | Required | Included |
 trip_id | Required | Included (persistent)|
 trip_headsign | Optional | Included | The average `trip_headsign` length is 13 characters. Expect field length to not exceed 80 characters.<br><br>Formats:<ul><li>**Destination** (Example: `Park Street`)</li><li>**Destination via Street or Landmark** (Example: `Andrew via South Bay Center`)</li><li>**Destination via Street or Landmark & Second Street or Landmark** (Example: `Wood Island via Market Basket & Admiral's Hill`)</li><li>**Destination via Street or Landmark and Second Street or Landmark** (Example: `Downtown Crossing via Airport and Paradise Road`)</li><li>**Destination (Express)** (Example: `Haymarket (Express)`)</li><li>**Destination (Limited Stops)** (Example: `Boston Medical Center (Limited Stops)`)</li><li>**Destination via Street or Landmark (Express)** (Example: `Woburn via Medford Square (Express)`)</li><li>**Destination via Street or Landmark & Second Street or Landmark (Express)** (Example: `Marblehead via Central Sq & Humphrey St (Express)`)</li></ul>
 trip_short_name | Optional | Included (some records) (persistent) | `trip_short_name` is only a persistent identifier for commuter rail and CapeFlyer, field is blank for other modes. Even though it is not explicitly an identification field, it can be used to keep track of trips spanning across regular schedule changes. Do not assume that every commuter rail trip will have a `trip_short_name`.
