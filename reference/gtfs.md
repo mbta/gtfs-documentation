@@ -292,7 +292,7 @@ Some transit trips serve more than one route. For example, Commuter Rail trips t
 
 This experimental file indicates routes that a trip is associated with, in addition to the `route_id` identified with this trip in [trips.txt](#tripstxt). If showing a schedule of all service on a route, that display should include trips associated with the route in [multi_route_trips.txt](#multi_route_tripstxt). If showing general information about a trip in a different context, the `route_id` identified with the in [trips.txt](#tripstxt) is still the best route to label the trip with.
 
-If a every trip of a `route_id` appears here, that route does not have any trips of "its own" and should probably not be shown to customers in lists of routes.
+If every trip of a `route_id` appears here, that route does not have any trips of "its own" and should probably not be shown to customers in lists of routes.
 
 Field Name | GTFS spec | Status | Notes
 ---------- | ------- | ------- | --------
