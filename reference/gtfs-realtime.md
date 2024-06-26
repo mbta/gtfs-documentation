@@ -94,7 +94,19 @@ fields that are not part of the GTFS Realtime specification.
 | -------------------------- | ------------------ | --------------------------- | ----------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [`EntitySelector`][mes]    | `activities`       | [Activity](#enum-activity)  | Many        | Required | Describes the activities impacted by an alert with regard to the selected entity.                                                                                                     |
 | [`StopTimeUpdate`][mstu]   | `boarding_status`  | string                      | One         | Optional | Describes the boarding status of the stop time as a short English-language string, for example _"On time"_, _"Now boarding"_, or _"Departed"_. Only provided for Commuter Rail trips. |
-| [`TripDescriptor`][mtd]    | `route_pattern_id` | string                      | One         | Optional | Indicates the route pattern the described trip belongs to (from [route_patterns.txt](gtfs.md#route_patternstxt) in GTFS).                                                             |
+| [`TripDescriptor`][mtd]    | `route_pattern_id` | string                      | One         | Optional | Indicates the route pattern the described trip belongs to (from [route_patterns.txt](gtfs.md#route_patternstxt) in GTFS).
+| [`Alert`][ma] | `alert_lifecycle` | [AlertLifecycle](#enum-alertlifecycle) | One | Required | Whether the alert is in effect now, will be in the future, or has been for a while.
+| [`Alert`][ma] | `banner_text` | [`TranslatedString`][tr] | One | Optional | Text to be displayed at the top of every page on MBTA.com. 
+| [`Alert`][ma] | `closed_timestamp` | uint64 | One | Optional | Close time, in POSIX time (i.e., number of seconds since January 1st 1970 00:00:00 UTC).
+| [`Alert`][ma] | `created_timestamp` | uint64 | One | Required | Creation time, in POSIX time (i.e., number of seconds since January 1st 1970 00:00:00 UTC).
+| [`Alert`][ma] | `duration_certainty` | [DurationCertainty](#enum-durationcertainty) | One | Required | Whether the alert has a known, unknown, or estimated end.
+| [`Alert`][ma] | `last_modified_timestamp` | uint64 | One | Required | Last modification time, in POSIX time (i.e., number of seconds since January 1st 1970 00:00:00 UTC). This is updated when the alert is modified in any way after creation.
+| [`Alert`][ma] | `last_push_notification_timestamp` | uint64 | One | Optional | Last meaningful modification time, in POSIX time (i.e., number of seconds since January 1st 1970 00:00:00 UTC). Addition of the field or a change in value indicates that a notification should be sent to riders.
+| [`Alert`][ma] | `recurrence_text` | [`TranslatedString`][tr] | One | Optional | Human readable summary of how active_period values are repeating (ex: “daily”, “weekdays”).
+| [`Alert`][ma] | `reminder_times` | uint64 | Many | Optional | Times at which riders should be reminded of long-running alerts.
+| [`Alert`][ma] | `service_effect_text` | [`TranslatedString`][tr] | One | Required | Brief summary of effect and affected service.
+| [`Alert`][ma] | `severity` | int32 | One | Required | How severe the alert is from least (0) to most (10) severe.
+| [`Alert`][ma] | `timeframe_text` | [`TranslatedString`][tr] | One | Optional | Human readable summary of when service will be disrupted.
 
 The enhanced feeds may include fields other than those listed here. Such fields
 should be treated as **experimental**, subject to change or removal at any time
@@ -118,6 +130,28 @@ the selected entity, their overall trip would be impacted.
 | `BRINGING_BIKE`    | Bringing a bicycle while boarding or exiting.      |
 | `STORE_BIKE`       | Storing a bicycle at a station.                    |
 | `PARK_CAR`         | Parking a car at a garage or lot in a station.     |
+
+### enum `AlertLifecycle`
+
+Details when the alert comes into effect. Times are calculated from the current time, not when the alert is created.
+
+| Value              | Description                                        |
+| ------------------ | -------------------------------------------------- |
+| `NEW` | In effect now. Alert affects service that is running right now (or within the next half-hour) and the alert has been modified within the last week for one time alerts or within the last two weeks for recurring alerts.                  |
+| `UPCOMING` | Not in effect now. Alert affects service that will run in the future, not service running right now. |
+| `ONGOING` | In effect now but old news. Alert affects service that is running now but hasn’t been modified for more than a week for one time alerts or more than two weeks for recurring alerts. |
+| `ONGOING_UPCOMING` | Not in effect now and old news. Recurring alert hasn’t been modified for more than two weeks and doesn’t apply to current service. |
+
+### enum `DurationCertainty`
+
+Whether the alert has a known, unknown, or estimated end.
+
+| Value              | Description                                        |
+| ------------------ | -------------------------------------------------- |
+| `ESTIMATED` | Active period has an end, but it was created with an intent that the alert would end at an unknown point “later today” 
+| `KNOWN` | **One time**: Active period has a well-defined end value. **Recurring**:  Alert is scheduled to be closed at a specific time. Closed alerts will always have a value of “KNOWN”. |
+| `UNKNOWN` | **One time**: Active period has no end (”until further notice”).  **Recurring**: Alert does not have a specified end date and will stay in the feed until it is closed |
+
 
 ## Occupancy data 
 
@@ -165,3 +199,4 @@ At this time, we are continuing to work on identifying non-revenue light rail tr
 [mos]: https://github.com/google/transit/blob/master/gtfs-realtime/spec/en/reference.md#enum-occupancystatus
 [msr]: https://github.com/google/transit/blob/master/gtfs-realtime/spec/en/reference.md#enum-schedulerelationship
 [mste]: https://github.com/google/transit/blob/master/gtfs-realtime/spec/en/reference.md#message-stoptimeevent
+[tr]: https://github.com/google/transit/blob/master/gtfs-realtime/spec/en/reference.md#message-translatedstring
