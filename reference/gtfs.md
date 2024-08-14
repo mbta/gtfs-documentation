@@ -345,7 +345,7 @@ network_id | Optional | Included | For use with [fare_leg_rules.txt](#fare_leg_r
 
 ## route_patterns.txt
 
-Experimental file used to describe the subsets of a route, representing different possible patterns of where trips may serve. For example, a bus route may have multiple branches, and each branch may be modeled as a separate route pattern per direction. Hieratically, the route pattern level may be considered to be larger than the trip level and smaller than the route level.
+Experimental file used to describe the subsets of a route, representing different possible patterns of where trips may serve. For example, a bus route may have multiple branches, and each branch may be modeled as a separate route pattern per direction. Hierarchically, the route pattern level may be considered to be larger than the trip level and smaller than the route level.
 
 For most MBTA modes, a route pattern will typically represent a unique set of stops that may be served on a route-trip combination. Seasonal schedule changes may result in trips within a route pattern having different routings. In simple changes, such a single bus stop removed or added between one schedule rating and the next (for example, between the Summer and Fall schedules), trips will be maintained on the same `route_pattern_id`. If the changes are significant, a new `route_pattern_id` may be introduced.
 
