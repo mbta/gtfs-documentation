@@ -75,7 +75,7 @@ agency_url | Required | Included |
 agency_timezone | Required | Included |
 agency_lang | Optional | Included |
 agency_phone | Optional | Included |
-agency_fare_url | Optional | N/A |
+agency_fare_url | Optional | Included |
 agency_email | Optional | N/A |
 
 ## areas.txt
