@@ -386,7 +386,7 @@ stop_lon | Required | Included (some records) | Children stops with a `parent_st
 zone_id | Optional | Included (some records) | Populated with Commuter Rail fare zone information at Commuter Rail stations and stops. Special values may be applied at stations at which multiple fare zones or where special event fares are in effect.
 stop_address | Experimental | Included (some records) | Optional field which allows a stop to have included a human-readable address.
 stop_url | Optional | Included (some records) | Populated for stops which are parent stations (`location_type` of `1`) or scheduled boarding locations (`location_type` of `0`).
-level_id | Experimental | Included (some records) | Reference to vertical station level from [levels.txt](#levelstxt).
+level_id | Optional | Included (some records) | Reference to vertical station level from [levels.txt](#levelstxt).
 location_type | Optional | Included | A value of `1` indicates a parent station complex, whereas `2` designates a station entrance/exit, `0` indicates a distinct boarding location, and `3` indicates a generic node within a station, such as the end of a staircase, elevator, or escalator.
 parent_station | Optional | Included (some records) | For stops location within stations, the `parent_station`'s `stop_id` represents the whole facility and the child stop represents a specific boarding area, entrance, or generic node.<br><br>All subway, Commuter Rail, and CapeFLYER stops have a parent station, as do some bus and Silver Line facilities, such as Dudley.
 stop_timezone | Optional | N/A |
