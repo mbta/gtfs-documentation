@@ -38,12 +38,12 @@ Table Name | GTFS spec | Status | Notes
 [facilities_properties.txt](#facilities_propertiestxt) | Experimental | Included | Properties of station amenities in [facilities.txt](#facilitiestxt).
 [facilities_properties_definitions.txt](#facilities_properties_definitionstxt) | Experimental | Included | Definitions of the `property_id`s and `value`s used in [facilities_properties.txt](#facilities_propertiestxt).
 [fare_attributes.txt](#fare_attributestxt) | Optional | N/A |
+[fare_leg_join_rules.txt](#fare_leg_join_rulestxt) | Optional | Included | Rules for treating multiple fare legs as a single effective fare leg.
 [fare_leg_rules.txt](#fare_leg_rulestxt) | Optional | Included | Rules for calculating fares for individual legs of travel. Does not include all possible MBTA fares.
 [fare_media.txt](#fare_mediatxt) | Optional | Included | Describes selected media that can be utilized to use fare products.
 [fare_products.txt](#fare_productstxt) | Optional | Included | Describes different types of fares that can be purchased by riders. Does not include all possible MBTA fares.
 [fare_rules.txt](#fare_rulestxt) | Optional | N/A |
 [fare_transfer_rules.txt](#fare_transfer_rulestxt) | Optional | Included | Rules for calculating fares for transfers between legs of travel.
-[fare_leg_join_rules.txt](#fare_leg_join_rulestxt) | Optional | Included | Rules for treating multiple fare legs as a single effective fare leg.
 [feed_info.txt](#feed_infotxt) | Optional | Included |
 [frequencies.txt](#frequenciestxt) | Optional | N/A |
 [levels.txt](#levelstxt) | Optional | Included | Provides relative elevation information for `stop_id`s (including boarding platforms, station entrances, and generic nodes) within a parent station.
