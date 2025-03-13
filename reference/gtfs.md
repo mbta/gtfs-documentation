@@ -239,7 +239,7 @@ fare_product_id | Optional | Included |
 
 ## fare_leg_join_rules.txt
 
-Currently only applies to fare legs along the CR-NewBedford line.
+Currently only applies to Commuter Rail fare legs transferring at stations with a high number of coordinated transfers between trips. May be expanded in the future to cover additional stations and/or modes.
 
 Field Name | GTFS spec | Status | Notes
 ---------- | -------- | ------ | --------
