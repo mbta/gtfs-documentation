@@ -160,8 +160,8 @@ Describes which end of the car is facing in the direciton of movement for light 
 
 | Value              | Description                                        |
 | ------------------ | -------------------------------------------------- |
-| `AB` | The end of the car with the pantograph connector is facing in the direction of movement
-| `BA` | The end of the car without the pantograph connector is facing in the direction of movement
+| `AB` | The "A" end of the car (with the pantograph connector) is facing in the direction of movement
+| `BA` | The "B" end of the car (end without the pantograph connector) is facing in the direction of movement
 
 ## Occupancy data 
 
