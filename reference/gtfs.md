@@ -43,7 +43,7 @@ Table Name | GTFS spec | Status | Notes
 [fare_products.txt](#fare_productstxt) | Optional | Included | Describes different types of fares that can be purchased by riders. Does not include all possible MBTA fares.
 [fare_rules.txt](#fare_rulestxt) | Optional | N/A |
 [fare_transfer_rules.txt](#fare_transfer_rulestxt) | Optional | Included | Rules for calculating fares for transfers between legs of travel.
-[fare_leg_join_rules.txt](#fare_leg_join_rulestxt) | Optional | Included | Rules for treating multiple fare legs as a single effective fare leg
+[fare_leg_join_rules.txt](#fare_leg_join_rulestxt) | Optional | Included | Rules for treating multiple fare legs as a single effective fare leg.
 [feed_info.txt](#feed_infotxt) | Optional | Included |
 [frequencies.txt](#frequenciestxt) | Optional | N/A |
 [levels.txt](#levelstxt) | Optional | Included | Provides relative elevation information for `stop_id`s (including boarding platforms, station entrances, and generic nodes) within a parent station.
@@ -245,7 +245,7 @@ Field Name | GTFS spec | Status | Notes
 ---------- | -------- | ------ | --------
 from_network_id | Required | Included |
 to_network_id | Required | Included |
-from_stop_Id | Conditionally Required | Included |
+from_stop_id | Conditionally Required | Included |
 to_stop_id | Conditionally Required | Included |
 
 ## feed_info.txt
