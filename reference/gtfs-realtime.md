@@ -109,6 +109,7 @@ fields that are not part of the GTFS Realtime specification.
 | [`Alert`][ma] | `service_effect_text` | [`TranslatedString`][tr] | One | Required | Brief summary of effect and affected service.
 | [`Alert`][ma] | `severity` | int32 | One | Required | How severe the alert is from least (0) to most (10) severe.
 | [`Alert`][ma] | `timeframe_text` | [`TranslatedString`][tr] | One | Optional | Human readable summary of when service will be disrupted.
+| [`CarriageDetails`][mcd] | `orientation` | [Orientation](#enum-orientation) | One | Optional | Describes which end of the car is facing in the direction of movement (light rail vehicles only)
 
 The enhanced feeds may include fields other than those listed here. Such fields
 should be treated as **experimental**, subject to change or removal at any time
@@ -154,6 +155,13 @@ Whether the alert has a known, unknown, or estimated end.
 | `KNOWN` | **One time**: Active period has a well-defined end value. **Recurring**:  Alert is scheduled to be closed at a specific time. Closed alerts will always have a value of “KNOWN”. |
 | `UNKNOWN` | **One time**: Active period has no end (”until further notice”).  **Recurring**: Alert does not have a specified end date and will stay in the feed until it is closed |
 
+### enum `Orientation`
+Describes which end of the car is facing in the direciton of movement for light rail vehicles
+
+| Value              | Description                                        |
+| ------------------ | -------------------------------------------------- |
+| `AB` | The "A" end of the car (with the pantograph connector) is facing in the direction of movement
+| `BA` | The "B" end of the car (end without the pantograph connector) is facing in the direction of movement
 
 ## Occupancy data 
 
@@ -167,7 +175,7 @@ Crowding estimates for each car are calculated based on live weight information 
 
 Crowding data is provided within the `multi_carriage_details` element in the `VehiclePosition` message.
 
-Each `multi_carriage_details` element contains a [`CarriageDetails`](https://gtfs.org/realtime/reference/#message-CarriageDetails) message :
+Each `multi_carriage_details` element contains a [`CarriageDetails`](mcd) message :
 
 | Field                | Type                     | Description                             |
 | -------------------- | ------------------------ | --------------------------------------- |
@@ -202,3 +210,4 @@ At this time, we are continuing to work on identifying non-revenue light rail tr
 [msr]: https://github.com/google/transit/blob/master/gtfs-realtime/spec/en/reference.md#enum-schedulerelationship
 [mste]: https://github.com/google/transit/blob/master/gtfs-realtime/spec/en/reference.md#message-stoptimeevent
 [tr]: https://github.com/google/transit/blob/master/gtfs-realtime/spec/en/reference.md#message-translatedstring
+[mcd]: https://gtfs.org/realtime/reference/#message-CarriageDetails
