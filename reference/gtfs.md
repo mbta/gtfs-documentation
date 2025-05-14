@@ -236,6 +236,9 @@ duration_limit | Optional | Included |
 duration_limit_type | Required | Included |
 fare_transfer_type | Required | Included |
 fare_product_id | Optional | Included |
+filter_fare_product_id | Experimental | Included | Identifies the fare product that must be used in both the pre-transfer leg identified by `from_leg_group_id` and the post-transfer leg identified by `to_leg_group_id`, such as a pass. If empty, this transfer rule applies to all fare products that match in both legs. Conditionally Forbidden if `fare_transfer_rules.fare_product_behavior` has a value of `0` or is empty.
+fare_media_behavior | Experimental | Included | Identifies whether the rule applies only when the same fare media is used in both the pre-transfer leg identified by `from_leg_group_id` and the post-transfer leg identified by `to_leg_group_id`. Valid options are:<ul><li>`0` or empty: The transfer rule only applies when both legs use the same fare media.</li><li>`1`: The transfer rule applies regardless of which media are used in both legs.</li></ul>
+fare_product_behavior | Experimental | Included | Identifies whether the rule applies only when the same fare product is used in both the pre-transfer leg identified by `from_leg_group_id` and the post-transfer leg identified by `to_leg_group_id`. Valid options are:<ul><li>`0` or empty: The transfer rule applies regardless of which products are used in both legs.</li><li>`1`: The transfer rule only applies when both legs use the same fare product.</li></ul>
 
 ## fare_leg_join_rules.txt
 
