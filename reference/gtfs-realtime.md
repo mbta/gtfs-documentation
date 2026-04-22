@@ -26,11 +26,11 @@ information is not reproduced here.
 
 The following experimental fields are provided:
 
-| Message                  | Field                    | Notes                                                                          |
-| ------------------------ | ------------------------ | ------------------------------------------------------------------------------ |
+| Message                  | Field                    | Notes                                      |
+| ------------------------ | ------------------------ | -------------------------------------------|
 | [`Alert`][ma]            | `severity_level`         |
 | [`TripUpdate`][mtu]      | `trip_properties`        |
-| [`TripProperties`][mtp]  | `trip_headsign`          |
+| [`TripProperties`][mtp]  | `trip_headsign`          | Set for subway only. Set to the new last stop of the trip. |
 | [`VehiclePosition`][mvp] | `occupancy_percentage`   |
 | [`VehiclePosition`][mvp] | `occupancy_status`       | The values used are `MANY_SEATS_AVAILABLE`, `FEW_SEATS_AVAILABLE`, and `FULL`. |
 | [`VehiclePosition`][mvp] | `multi_carriage_details` |
