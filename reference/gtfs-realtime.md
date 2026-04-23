@@ -30,7 +30,7 @@ The following experimental fields are provided:
 | ------------------------ | ------------------------ | -------------------------------------------|
 | [`Alert`][ma]            | `severity_level`         |
 | [`TripUpdate`][mtu]      | `trip_properties`        |
-| [`TripProperties`][mtp]  | `trip_headsign`          | Set for subway only. Set to the new last stop of the trip. |
+| [`TripProperties`][mtp]  | `trip_headsign`          | Override of the usual [`trip_headsign`][static_ths] when a trip's final stop has changed (e.g., due to disruption). |
 | [`VehiclePosition`][mvp] | `occupancy_percentage`   |
 | [`VehiclePosition`][mvp] | `occupancy_status`       | The values used are `MANY_SEATS_AVAILABLE`, `FEW_SEATS_AVAILABLE`, and `FULL`. |
 | [`VehiclePosition`][mvp] | `multi_carriage_details` |
@@ -208,6 +208,7 @@ At this time, we are continuing to work on identifying non-revenue light rail tr
 [mtd]: https://github.com/google/transit/blob/master/gtfs-realtime/spec/en/reference.md#message-tripdescriptor
 [mtu]: https://github.com/google/transit/blob/master/gtfs-realtime/spec/en/reference.md#message-tripupdate
 [mtp]: https://github.com/google/transit/blob/master/gtfs-realtime/spec/en/reference.md#message-tripproperties
+[static_ths]: https://github.com/mbta/gtfs-documentation/blob/master/reference/gtfs.md#tripstxt
 [mvd]: https://github.com/google/transit/blob/master/gtfs-realtime/spec/en/reference.md#message-vehicledescriptor
 [mvp]: https://github.com/google/transit/blob/master/gtfs-realtime/spec/en/reference.md#message-vehicleposition
 [mcd]: https://github.com/google/transit/blob/master/gtfs-realtime/spec/en/reference.md#message-carriagedetails
