@@ -26,13 +26,14 @@ information is not reproduced here.
 
 The following experimental fields are provided:
 
-| Message                  | Field                  | Notes                                                                          |
-| ------------------------ | ---------------------- | ------------------------------------------------------------------------------ |
-| [`Alert`][ma]            | `severity_level`       |
-| [`EntitySelector`][mes]  | `direction_id`         |
-| [`TripDescriptor`][mtd]  | `direction_id`         |
-| [`VehiclePosition`][mvp] | `occupancy_percentage` |
-| [`VehiclePosition`][mvp] | `occupancy_status`     | The values used are `MANY_SEATS_AVAILABLE`, `FEW_SEATS_AVAILABLE`, and `FULL`. |
+| Message                  | Field                    | Notes                                      |
+| ------------------------ | ------------------------ | -------------------------------------------|
+| [`Alert`][ma]            | `severity_level`         |
+| [`TripUpdate`][mtu]      | `trip_properties`        |
+| [`TripProperties`][mtp]  | `trip_headsign`          | Override of the usual [`trip_headsign`][static_ths] when a trip's final stop has changed (e.g., due to disruption). |
+| [`VehiclePosition`][mvp] | `occupancy_percentage`   |
+| [`VehiclePosition`][mvp] | `occupancy_status`       | The values used are `MANY_SEATS_AVAILABLE`, `FEW_SEATS_AVAILABLE`, and `FULL`. |
+| [`VehiclePosition`][mvp] | `multi_carriage_details` |
 
 Occupancy data is only available for certain routes and vehicles. For details,
 see the MBTA's [Crowding Information][crowding] page.
@@ -199,14 +200,18 @@ Non-revenue trips only appear in the enhanced feed.
 At this time, we are continuing to work on identifying non-revenue light rail trips
 (Green Line, Mattapan Trolley). In the meantime, these trips may appear as revenue trips in the feeds.
 
-[rt-docs]: https://github.com/google/transit/tree/master/gtfs
+[rt-docs]: https://github.com/google/transit/tree/master/gtfs-realtime
 [crowding]: https://www.mbta.com/projects/crowding-information-riders
 [ma]: https://github.com/google/transit/blob/master/gtfs-realtime/spec/en/reference.md#message-alert
 [mes]: https://github.com/google/transit/blob/master/gtfs-realtime/spec/en/reference.md#message-entityselector
 [mstu]: https://github.com/google/transit/blob/master/gtfs-realtime/spec/en/reference.md#message-stoptimeupdate
 [mtd]: https://github.com/google/transit/blob/master/gtfs-realtime/spec/en/reference.md#message-tripdescriptor
+[mtu]: https://github.com/google/transit/blob/master/gtfs-realtime/spec/en/reference.md#message-tripupdate
+[mtp]: https://github.com/google/transit/blob/master/gtfs-realtime/spec/en/reference.md#message-tripproperties
+[static_ths]: https://github.com/mbta/gtfs-documentation/blob/master/reference/gtfs.md#tripstxt
 [mvd]: https://github.com/google/transit/blob/master/gtfs-realtime/spec/en/reference.md#message-vehicledescriptor
 [mvp]: https://github.com/google/transit/blob/master/gtfs-realtime/spec/en/reference.md#message-vehicleposition
+[mcd]: https://github.com/google/transit/blob/master/gtfs-realtime/spec/en/reference.md#message-carriagedetails
 [mos]: https://github.com/google/transit/blob/master/gtfs-realtime/spec/en/reference.md#enum-occupancystatus
 [msr]: https://github.com/google/transit/blob/master/gtfs-realtime/spec/en/reference.md#enum-schedulerelationship
 [mste]: https://github.com/google/transit/blob/master/gtfs-realtime/spec/en/reference.md#message-stoptimeevent
